@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendGrantApplication } from '@/lib/email';
+import { siteConfig } from '@/data/site';
 import { GRANT_CHAR_LIMIT, type GrantApplication, type GrantCategoryId } from '@/types/grants';
 
 const validCategories: GrantCategoryId[] = [
@@ -13,6 +14,17 @@ const validCategories: GrantCategoryId[] = [
 
 export async function POST(request: NextRequest) {
   try {
+    // Reject submissions while the grant program is paused.
+    if (!siteConfig.grants.open) {
+      return NextResponse.json(
+        {
+          error:
+            'The grant program is currently paused and not accepting applications. Please check back once we have secured dedicated funding.',
+        },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
 
     // Validate required fields

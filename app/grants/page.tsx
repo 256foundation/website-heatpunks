@@ -10,10 +10,10 @@ import { grantFAQs } from '@/data/grants';
 
 export const metadata: Metadata = {
   title: 'Grants',
-  description: 'Apply for grants to support hashrate heating projects. Funding for builders, researchers, and educators.',
+  description: 'The Hashrate Heatpunk Grant Program funds builders, researchers, and educators advancing hashrate heating. Applications are currently paused while we raise dedicated funding.',
   openGraph: {
     title: 'Grants | Hashrate Heatpunks',
-    description: 'Apply for grants to support hashrate heating projects. Funding for builders, researchers, and educators.',
+    description: 'The Hashrate Heatpunk Grant Program funds builders, researchers, and educators advancing hashrate heating. Applications are currently paused while we raise dedicated funding.',
     images: ['/api/og?title=Grants%20Program&subtitle=Funding%20for%20hashrate%20heating%20projects&page=grants'],
   },
 };

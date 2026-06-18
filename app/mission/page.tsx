@@ -234,17 +234,26 @@ export default function MissionPage() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <Link href="/grants" className="btn-primary group">
-              <span className="relative z-10">APPLY FOR A GRANT</span>
-              <span className="btn-heat" />
-            </Link>
+            {siteConfig.grants.open && (
+              <Link href="/grants" className="btn-primary group">
+                <span className="relative z-10">APPLY FOR A GRANT</span>
+                <span className="btn-heat" />
+              </Link>
+            )}
             <a
               href={siteConfig.foundation.donate}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline"
+              className={siteConfig.grants.open ? 'btn-outline' : 'btn-primary group'}
             >
-              SUPPORT THE MISSION ↗
+              {siteConfig.grants.open ? (
+                'SUPPORT THE MISSION ↗'
+              ) : (
+                <>
+                  <span className="relative z-10">SUPPORT THE MISSION ↗</span>
+                  <span className="btn-heat" />
+                </>
+              )}
             </a>
             <Link href="/education" className="btn-secondary">
               LEARN MORE

@@ -10,9 +10,10 @@ export function DonateSection() {
             SUPPORT THE <span className="text-[var(--accent)]">MISSION</span>
           </h2>
           <p className="text-[var(--muted)] leading-relaxed max-w-2xl">
-            Want to support hashrate heating research and development? Donations to the
-            256 Foundation directly fund grants like these, helping accelerate global
-            adoption of this transformative technology.
+            The grant program runs on community funding. Donations to the 256 Foundation
+            directly fund grants like these - and right now, they&apos;re what will let us
+            reopen the program and resume funding the builders, researchers, and educators
+            advancing hashrate heating worldwide.
           </p>
         </div>
         <a

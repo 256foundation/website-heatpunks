@@ -29,6 +29,13 @@ export const siteConfig = {
     github: 'https://github.com/256foundation',
     donate: DONATE_URL,
   },
+
+  // Grant program status. Flip `open` to true to reopen applications:
+  // this re-enables the application form, the API endpoint, and the
+  // "apply" CTAs across the site in one change.
+  grants: {
+    open: false,
+  },
 };
 
 export interface NavItem {

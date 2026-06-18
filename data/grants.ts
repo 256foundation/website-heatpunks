@@ -1,4 +1,5 @@
 import type { GrantCategory, GrantFAQ, GrantCategoryId } from '@/types/grants';
+import { siteConfig } from '@/data/site';
 
 export const grantCategories: GrantCategory[] = [
   {
@@ -34,7 +35,14 @@ export const categoryOptions: { value: GrantCategoryId; label: string }[] = [
   { value: 'other', label: 'Other' },
 ];
 
+// Shown only while the program is paused (see siteConfig.grants.open).
+const pausedFAQ: GrantFAQ = {
+  question: 'Is the grant program accepting applications right now?',
+  answer: 'Not at the moment. The program is paused while we focus on fundraising. Grant cycles run intermittently rather than on a fixed schedule, and we\'ll reopen applications once we\'ve secured dedicated funding. The best way to help grants resume sooner is to donate to the 256 Foundation.',
+};
+
 export const grantFAQs: GrantFAQ[] = [
+  ...(siteConfig.grants.open ? [] : [pausedFAQ]),
   {
     question: 'Who can apply?',
     answer: 'Anyone - individuals, teams, companies, universities, and nonprofits from anywhere in the world.',
@@ -57,7 +65,7 @@ export const grantFAQs: GrantFAQ[] = [
   },
   {
     question: 'What\'s the review process?',
-    answer: 'We review applications on a rolling basis. There are no deadlines. If we\'re interested, we\'ll reach out to learn more.',
+    answer: 'We run grant cycles intermittently as funding allows, rather than on a fixed schedule. When a cycle is open, we review applications and reach out if we\'re interested in learning more.',
   },
   {
     question: 'Can I apply multiple times?',

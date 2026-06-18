@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { siteConfig } from '@/data/site';
 
 const grantFocusAreas = [
   { icon: '⚡', label: 'STANDARDS' },
@@ -18,8 +19,14 @@ export function GrantsSection() {
             FUND THE <span className="text-[var(--accent)]">FUTURE</span>
           </h2>
           <p className="text-[var(--muted)] mt-2 text-sm max-w-2xl">
-            The 256 Foundation funds foundational work accelerating open-source mining and hashrate heating.
-            No safety standards? No building codes? We&apos;re funding the solutions.
+            The Hashrate Heatpunk Grant Program funds foundational work accelerating open-source mining and
+            hashrate heating - standards, research, documentation, and education.
+            {!siteConfig.grants.open && (
+              <>
+                {' '}Applications are paused while we raise dedicated funding; your donation is what brings
+                them back.
+              </>
+            )}
           </p>
         </div>
 
@@ -34,10 +41,27 @@ export function GrantsSection() {
         </div>
 
         {/* CTA */}
-        <Link href="/grants" className="btn-primary group">
-          <span className="relative z-10">APPLY FOR GRANT</span>
-          <span className="btn-heat" />
-        </Link>
+        {siteConfig.grants.open ? (
+          <Link href="/grants" className="btn-primary group">
+            <span className="relative z-10">APPLY FOR GRANT</span>
+            <span className="btn-heat" />
+          </Link>
+        ) : (
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={siteConfig.foundation.donate}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary group"
+            >
+              <span className="relative z-10">DONATE TO FUND GRANTS ↗</span>
+              <span className="btn-heat" />
+            </a>
+            <Link href="/grants" className="btn-outline">
+              PROGRAM DETAILS
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
