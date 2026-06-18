@@ -5,8 +5,14 @@ export interface Video {
   youtubeId: string;
 }
 
-// 2026 Summit videos (ordered chronologically: keynote → talks → award → workshops)
+// 2026 Summit videos (recap first, then ordered chronologically: keynote → talks → award → workshops)
 export const summit2026Videos: Video[] = [
+  {
+    id: 'hps26-recap',
+    title: 'Heatpunk Summit 2026 Recap',
+    description: 'A short recap film capturing the energy of Heatpunk Summit 2026 in Denver — the second annual gathering of bitcoin mining and heating builders advancing the hashrate heating industry.',
+    youtubeId: 'PsRaSv3Y0_k',
+  },
   {
     id: 'hps26-keynote',
     title: 'Welcome Remarks & Defining An Industry Keynote',
