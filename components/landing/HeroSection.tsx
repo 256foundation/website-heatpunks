@@ -40,10 +40,11 @@ export function HeroSection() {
           </span>
           <span className="text-[var(--card-border)] hidden md:inline">|</span>
           <span>
-            <span className="text-[var(--accent)]">PARENT ORG:</span>{' '}
+            PROJECT UNDER THE{' '}
             <a href={siteConfig.foundation.url} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)] transition-colors">
               256 FOUNDATION
             </a>
+            {' '}- 501(c)(3)
           </span>
         </div>
 

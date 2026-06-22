@@ -41,7 +41,7 @@ export function BookSection() {
               </p>
 
               <a
-                href="https://braiins.com/books/bitcoin-mining-heat-reuse"
+                href="https://www.amazon.com/dp/B0GYJ8QDK6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary group"

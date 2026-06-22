@@ -145,6 +145,10 @@ html {
   opacity: var(--noise-opacity);
   pointer-events: none;
   z-index: 1;
+  /* Promote to a stable GPU layer so the expensive SVG-noise raster is
+     painted once and not re-tiled on the fly (prevents blank/grey tiles). */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Scan lines effect (CRT monitor) - subtle in light mode */
@@ -160,6 +164,9 @@ html {
   );
   pointer-events: none;
   z-index: 2;
+  /* Stable GPU layer (see .noise-overlay). */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Flame glow background effect - adapts to theme */
@@ -169,6 +176,12 @@ html {
     radial-gradient(ellipse at 20% 80%, rgba(255,61,0,0.1) 0%, transparent 40%),
     radial-gradient(ellipse at 80% 80%, rgba(255,61,0,0.1) 0%, transparent 40%),
     linear-gradient(180deg, var(--background) 0%, var(--background-alt) 100%);
+  /* The opacity animation (animate-flame-glow) promotes this to its own
+     compositing layer; pin it to a stable GPU texture so neighboring
+     full-screen layers don't get re-tiled and dropped mid-repaint. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: opacity;
 }
 
 @media (prefers-color-scheme: light) {
@@ -178,6 +191,18 @@ html {
       radial-gradient(ellipse at 20% 80%, rgba(255,107,0,0.05) 0%, transparent 40%),
       radial-gradient(ellipse at 80% 80%, rgba(255,107,0,0.05) 0%, transparent 40%),
       linear-gradient(180deg, var(--background) 0%, var(--background-alt) 100%);
+  }
+}
+
+/* Respect users who prefer reduced motion: drop the continuous background
+   and text animations. This also removes a constant source of compositor
+   repaints, which is the trigger for the intermittent grey-tile artifact. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-flame-glow,
+  .animate-text-glow,
+  .animate-blink,
+  .flame-bar {
+    animation: none !important;
   }
 }
 

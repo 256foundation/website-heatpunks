@@ -8,6 +8,10 @@ import type {
 
 const DISCOURSE_URL = process.env.DISCOURSE_URL || 'https://forum.heatpunks.org';
 
+// Hard ceiling per network attempt so a slow/hanging forum can never stall
+// page regeneration (which would otherwise risk a platform/proxy timeout).
+const FETCH_TIMEOUT_MS = 5000;
+
 // Helper to build topic URL
 const getTopicUrl = (slug: string, id: number) => `${DISCOURSE_URL}/t/${slug}/${id}`;
 
@@ -44,7 +48,12 @@ async function fetchWithRetry(
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
-      const response = await fetch(url, options);
+      // Bound every attempt with a timeout; on expiry fetch rejects and we
+      // fall through to the retry/backoff path below.
+      const response = await fetch(url, {
+        ...options,
+        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+      });
 
       // If successful, return immediately
       if (response.ok) {
@@ -82,7 +91,7 @@ async function getTopicImages(topicId: number, topicTitle: string, topicSlug: st
     const response = await fetchWithRetry(`${DISCOURSE_URL}/t/${topicId}.json`, {
       headers: getDiscourseHeaders(),
       next: { revalidate: 300 }, // Cache for 5 minutes
-    });
+    }, 1); // Gallery images are non-critical: at most one retry to keep regeneration fast
 
     if (!response.ok) {
       return [];
@@ -159,11 +168,80 @@ export interface DiscourseData {
   images: ForumImage[];
 }
 
-export async function getDiscourseData(topicsLimit = 10, imagesLimit = 12): Promise<DiscourseData | null> {
-  try {
-    const headers = getDiscourseHeaders();
+// Last-known-good data, held in module memory for the lifetime of the server
+// instance. When a fetch/regeneration fails transiently, we serve this instead
+// of a null/empty feed — so a brief forum hiccup never poisons the cached page.
+let lastGoodData: DiscourseData | null = null;
 
-    // Fetch topics and categories in parallel with retry logic
+// Test-only: clear the in-memory last-known-good cache between cases so module
+// state doesn't leak across tests. No effect on production code paths.
+export function __resetDiscourseCacheForTests(): void {
+  lastGoodData = null;
+}
+
+// Build the gallery image list from an already-fetched topic list.
+// First pass uses topic.image_url (no extra network). Second pass fetches a
+// few topics' posts in PARALLEL to fill gaps without serializing latency.
+async function buildImages(
+  data: DiscourseLatestResponse,
+  imagesLimit: number
+): Promise<ForumImage[]> {
+  const images: ForumImage[] = data.topic_list.topics
+    .filter((topic) => topic.image_url)
+    .slice(0, imagesLimit)
+    .map((topic) => ({
+      id: topic.id,
+      url: topic.image_url!.startsWith('http')
+        ? topic.image_url!
+        : `${DISCOURSE_URL}${topic.image_url}`,
+      topicTitle: topic.fancy_title || topic.title,
+      topicUrl: getTopicUrl(topic.slug, topic.id),
+    }));
+
+  if (images.length >= imagesLimit) {
+    return images;
+  }
+
+  // Fill remaining slots from topics without a thumbnail. Cap at 5 topics and
+  // run them concurrently; getTopicImages already swallows its own errors.
+  const candidates = data.topic_list.topics
+    .filter((topic) => !topic.image_url)
+    .slice(0, 5);
+
+  const candidateImages = await Promise.all(
+    candidates.map(async (topic) => {
+      const replyImages = await getTopicImages(
+        topic.id,
+        topic.fancy_title || topic.title,
+        topic.slug
+      );
+      if (replyImages.length === 0) return null;
+      return {
+        id: topic.id,
+        url: replyImages[0],
+        topicTitle: topic.fancy_title || topic.title,
+        topicUrl: getTopicUrl(topic.slug, topic.id),
+      } as ForumImage;
+    })
+  );
+
+  for (const image of candidateImages) {
+    if (images.length >= imagesLimit) break;
+    if (image) images.push(image);
+  }
+
+  return images;
+}
+
+export async function getDiscourseData(topicsLimit = 10, imagesLimit = 12): Promise<DiscourseData | null> {
+  const headers = getDiscourseHeaders();
+
+  let validTopicData: DiscourseLatestResponse | null = null;
+  let categoryMap: Record<number, string> = {};
+
+  // Fetch topics and categories in parallel. Network/parse failures are
+  // contained here so they degrade to last-known-good rather than throwing.
+  try {
     const [topicsResponse, categoriesResponse] = await Promise.all([
       fetchWithRetry(`${DISCOURSE_URL}/latest.json`, {
         headers,
@@ -175,31 +253,39 @@ export async function getDiscourseData(topicsLimit = 10, imagesLimit = 12): Prom
       }),
     ]);
 
-    if (!topicsResponse.ok) {
+    if (topicsResponse.ok) {
+      const data = await topicsResponse.json();
+      if (isValidDiscourseResponse(data)) {
+        validTopicData = data;
+      } else {
+        console.error('Invalid Discourse response structure:', data);
+      }
+    } else {
       console.error(`Discourse API error: ${topicsResponse.status}`);
-      return null;
     }
 
-    const data: DiscourseLatestResponse = await topicsResponse.json();
-
-    // Validate response structure
-    if (!isValidDiscourseResponse(data)) {
-      console.error('Invalid Discourse response structure:', data);
-      return null;
-    }
-
-    // Build category map from categories response
-    let categoryMap: Record<number, string> = {};
     if (categoriesResponse.ok) {
-      const categoriesData: DiscourseCategoriesResponse = await categoriesResponse.json();
-      categoryMap = Object.fromEntries(
-        categoriesData.category_list.categories.map(cat => [cat.id, cat.name])
-      );
+      try {
+        const categoriesData: DiscourseCategoriesResponse = await categoriesResponse.json();
+        categoryMap = Object.fromEntries(
+          categoriesData.category_list.categories.map((cat) => [cat.id, cat.name])
+        );
+      } catch (categoriesError) {
+        console.error('Error parsing Discourse categories:', categoriesError);
+      }
     }
+  } catch (error) {
+    console.error('Failed to fetch Discourse data:', error);
+  }
 
-    // Transform to topics format
+  // Process whatever we successfully fetched. Topics and images are built
+  // independently so one failing never wipes out the other.
+  let freshTopics: ForumTopic[] | null = null;
+  let freshImages: ForumImage[] | null = null;
+
+  if (validTopicData) {
     try {
-      const topics: ForumTopic[] = data.topic_list.topics
+      freshTopics = validTopicData.topic_list.topics
         .slice(0, topicsLimit)
         .map((topic) => ({
           id: topic.id,
@@ -209,58 +295,35 @@ export async function getDiscourseData(topicsLimit = 10, imagesLimit = 12): Prom
           url: getTopicUrl(topic.slug, topic.id),
           timeAgo: getTimeAgo(topic.last_posted_at || topic.created_at),
         }));
-
-      // Transform to images format (filter topics with images)
-      // First pass: get images from topics with image_url (fast)
-      const images: ForumImage[] = data.topic_list.topics
-        .filter((topic) => topic.image_url)
-        .slice(0, imagesLimit)
-        .map((topic) => ({
-          id: topic.id,
-          url: topic.image_url!.startsWith('http')
-            ? topic.image_url!
-            : `${DISCOURSE_URL}${topic.image_url}`,
-          topicTitle: topic.fancy_title || topic.title,
-          topicUrl: getTopicUrl(topic.slug, topic.id),
-        }));
-
-      // Second pass: if we need more images, fetch from topics without image_url
-      // Limit to 5 additional API calls to balance coverage vs. performance
-      if (images.length < imagesLimit) {
-        const topicsWithoutImages = data.topic_list.topics
-          .filter((topic) => !topic.image_url)
-          .slice(0, 5); // Max 5 additional API calls
-
-        for (const topic of topicsWithoutImages) {
-          if (images.length >= imagesLimit) break; // Stop if we have enough images
-
-          const replyImages = await getTopicImages(
-            topic.id,
-            topic.fancy_title || topic.title,
-            topic.slug
-          );
-
-          // Add first image from replies if available
-          if (replyImages.length > 0) {
-            images.push({
-              id: topic.id,
-              url: replyImages[0],
-              topicTitle: topic.fancy_title || topic.title,
-              topicUrl: getTopicUrl(topic.slug, topic.id),
-            });
-          }
-        }
-      }
-
-      return { topics, images };
     } catch (processingError) {
-      console.error('Error processing Discourse data:', processingError);
-      return null;
+      console.error('Error processing Discourse topics:', processingError);
     }
-  } catch (error) {
-    console.error('Failed to fetch Discourse data:', error);
+
+    try {
+      freshImages = await buildImages(validTopicData, imagesLimit);
+    } catch (imageError) {
+      console.error('Error processing Discourse images:', imageError);
+    }
+  }
+
+  // Merge fresh results with last-known-good, per-section. A successful fetch
+  // that yields an empty array (e.g. no images) is still "fresh" and kept.
+  const topics = freshTopics ?? lastGoodData?.topics ?? null;
+  const images = freshImages ?? lastGoodData?.images ?? null;
+
+  // Persist whatever fresh data we obtained so future failures can fall back.
+  if (freshTopics || freshImages) {
+    lastGoodData = {
+      topics: freshTopics ?? lastGoodData?.topics ?? [],
+      images: freshImages ?? lastGoodData?.images ?? [],
+    };
+  }
+
+  if (!topics && !images) {
     return null;
   }
+
+  return { topics: topics ?? [], images: images ?? [] };
 }
 
 // Legacy functions for backward compatibility and independent usage

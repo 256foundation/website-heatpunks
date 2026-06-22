@@ -1,8 +1,14 @@
-import { getTimeAgo, getLatestTopics, getTopicsWithImages, getDiscourseData } from '../discourse';
+import { getTimeAgo, getLatestTopics, getTopicsWithImages, getDiscourseData, __resetDiscourseCacheForTests } from '../discourse';
 
 // Mock fetch globally
 const mockFetch = jest.fn();
 global.fetch = mockFetch;
+
+// Clear the module-level last-known-good cache before every test so state
+// from one case (e.g. a successful fetch) doesn't leak into the next.
+beforeEach(() => {
+  __resetDiscourseCacheForTests();
+});
 
 describe('getTimeAgo', () => {
   beforeEach(() => {
@@ -148,6 +154,28 @@ describe('getDiscourseData', () => {
     const data = await getDiscourseData();
 
     expect(data).toBeNull();
+  });
+
+  it('serves last-known-good data when a later fetch fails', async () => {
+    // First call succeeds and populates the in-memory cache.
+    mockFetch
+      .mockResolvedValueOnce({ ok: true, json: async () => mockTopicsResponse })
+      .mockResolvedValueOnce({ ok: true, json: async () => mockCategoriesResponse });
+
+    const good = await getDiscourseData(10, 12);
+    expect(good!.topics).toHaveLength(2);
+    expect(good!.images).toHaveLength(1);
+
+    // A subsequent fetch fails entirely. Instead of a null/empty feed, we
+    // should get the cached data back so the page never shows "unavailable".
+    mockFetch
+      .mockResolvedValueOnce({ ok: false, status: 503 })
+      .mockResolvedValueOnce({ ok: false, status: 503 });
+
+    const stale = await getDiscourseData(10, 12);
+    expect(stale).not.toBeNull();
+    expect(stale!.topics).toHaveLength(2);
+    expect(stale!.images).toHaveLength(1);
   });
 });
 
