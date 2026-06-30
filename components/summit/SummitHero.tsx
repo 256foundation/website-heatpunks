@@ -70,7 +70,7 @@ export function SummitHero({ summit, sponsors, stats }: SummitHeroProps) {
               onClick={() => setIsModalOpen(true)}
               className="btn-primary group"
             >
-              <span className="relative z-10">REQUEST INVITE FOR HPS2027</span>
+              <span className="relative z-10">JOIN THE HPS 2027 WAITLIST</span>
               <span className="btn-heat" />
             </button>
 

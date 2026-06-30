@@ -1,40 +1,36 @@
 import type { Metadata } from 'next';
-import { SummitHero } from '@/components/summit/SummitHero';
-import { AboutSection } from '@/components/summit/AboutSection';
-import { InfoDeckSection } from '@/components/summit/InfoDeckSection';
-import { SummitVideoSection } from '@/components/summit/SummitVideoSection';
-import { WhyWhoSection } from '@/components/summit/WhyWhoSection';
-import { WorkshopsSection } from '@/components/summit/WorkshopsSection';
-import { TopicsSection } from '@/components/summit/TopicsSection';
-import { HighlightsSection } from '@/components/summit/HighlightsSection';
-import { DetailsSection } from '@/components/summit/DetailsSection';
-import { VenueSection } from '@/components/summit/VenueSection';
+import { Summit2027Hero } from '@/components/summit/Summit2027Hero';
+import { WhyAttendSection } from '@/components/summit/WhyAttendSection';
+import { WhatToExpectSection } from '@/components/summit/WhatToExpectSection';
+import { Details2027Section } from '@/components/summit/Details2027Section';
 import { RegistrationSection } from '@/components/summit/RegistrationSection';
-import { SummitCommunitySection } from '@/components/summit/SummitCommunitySection';
-import { SponsorGrid } from '@/components/summit/SponsorGrid';
+import { SponsorshipSection } from '@/components/summit/SponsorshipSection';
+import { PastSummitsSection } from '@/components/summit/PastSummitsSection';
 import { FAQSection } from '@/components/summit/FAQSection';
-import { getScheduleData, getSponsors } from '@/lib/schedule';
-import { getSessionsByType } from '@/lib/scheduleUtils';
+import { ManifestoSection } from '@/components/summit/ManifestoSection';
+import { SummitCommunitySection } from '@/components/summit/SummitCommunitySection';
 
 export const metadata: Metadata = {
-  title: 'Summit 2026',
-  description: 'Heatpunk Summit 2026 - February 27-28 in Denver, CO. 150+ builders gathered for workshops, demos, and networking.',
+  title: 'Summit 2027',
+  description:
+    'Heatpunk Summit 2027 — February 26–27 in Denver, CO. The third annual gathering of bitcoin mining and heating builders. Join the waitlist.',
   openGraph: {
-    title: 'Summit 2026 | Hashrate Heatpunks',
-    description: 'Heatpunk Summit 2026 - February 27-28 in Denver, CO. 150+ builders gathered for workshops, demos, and networking.',
-    images: ['/api/og?title=HEATPUNK%20SUMMIT&subtitle=FEB%2027-28%2C%202026%20%E2%80%A2%20DENVER%2C%20CO&page=summit'],
+    title: 'Heatpunk Summit 2027 | Hashrate Heatpunks',
+    description:
+      'Third annual gathering of bitcoin mining and heating builders — Feb 26–27, 2027 in Denver, CO.',
+    images: ['/api/og?title=HEATPUNK%20SUMMIT&subtitle=FEB%2026-27%2C%202027%20%E2%80%A2%20DENVER%2C%20CO&page=summit'],
   },
 };
 
-// Event JSON-LD Schema
 const eventSchema = {
   '@context': 'https://schema.org',
   '@type': 'Event',
-  name: 'Heatpunk Summit 2026',
-  description: 'Annual gathering of hashrate heating builders, featuring workshops, demos, and networking.',
-  startDate: '2026-02-27',
-  endDate: '2026-02-28',
-  eventStatus: 'https://schema.org/EventCompleted',
+  name: 'Heatpunk Summit 2027',
+  description:
+    'Annual gathering of hashrate heating builders, featuring talks, workshops, demos, and networking.',
+  startDate: '2027-02-26',
+  endDate: '2027-02-27',
+  eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   location: {
     '@type': 'Place',
@@ -56,71 +52,49 @@ const eventSchema = {
   offers: {
     '@type': 'Offer',
     availability: 'https://schema.org/InStock',
-    price: '0',
+    price: '350',
     priceCurrency: 'USD',
     url: 'https://heatpunks.org/summit',
   },
 };
 
 export default function SummitPage() {
-  const scheduleData = getScheduleData();
-  const sponsors = getSponsors();
-
-  // Extract workshops and calculate stats from schedule data
-  const workshops = getSessionsByType(scheduleData, 'workshop');
-  const stats = {
-    workshops: workshops.length,
-    demos: getSessionsByType(scheduleData, 'demo').length,
-  };
-
   return (
     <div className="bg-[var(--black)]">
-      {/* Event JSON-LD Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
       />
-      {/* Hero with stats bar */}
-      <SummitHero summit={scheduleData.summit} sponsors={sponsors} stats={stats} />
 
-      {/* [001] About */}
-      <AboutSection />
+      {/* [001] Hero — dates, location, waitlist CTA, stats bar */}
+      <Summit2027Hero />
 
-      {/* Overview Deck */}
-      <InfoDeckSection />
+      {/* [002] Why attend — three-summit arc */}
+      <WhyAttendSection />
 
-      {/* [002] Summit Videos */}
-      <SummitVideoSection />
+      {/* [003] What to expect — talks, workshops, demos, networking */}
+      <WhatToExpectSection />
 
-      {/* Why + Who cards */}
-      <WhyWhoSection />
+      {/* [004] Event details — dates, venue, map */}
+      <Details2027Section />
 
-      {/* [003] Workshops */}
-      <WorkshopsSection workshops={workshops} />
-
-      {/* [004] Topics */}
-      <TopicsSection />
-
-      {/* [005] Highlights */}
-      <HighlightsSection />
-
-      {/* When/Where Details */}
-      <DetailsSection summit={scheduleData.summit} scheduleData={scheduleData} />
-
-      {/* Interactive Map */}
-      <VenueSection summit={scheduleData.summit} />
-
-      {/* [006] Registration/Pricing */}
+      {/* [007] Registration — join the waitlist */}
       <RegistrationSection />
 
-      {/* [007] Community */}
-      <SummitCommunitySection />
+      {/* [005] Sponsorship pitch + past sponsors */}
+      <SponsorshipSection />
 
-      {/* Sponsors */}
-      <SponsorGrid sponsors={sponsors} />
+      {/* [006] Past summits archive links */}
+      <PastSummitsSection />
 
-      {/* [008] FAQ (interactive) */}
+      {/* [008] FAQ */}
       <FAQSection />
+
+      {/* Manifesto */}
+      <ManifestoSection />
+
+      {/* Community links */}
+      <SummitCommunitySection />
     </div>
   );
 }

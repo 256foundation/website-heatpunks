@@ -6,7 +6,7 @@ interface PageProps {
   params: Promise<{ year: string }>;
 }
 
-const archivedYears = ['2025', '2026'];
+const archivedYears: string[] = [];
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { year } = await params;

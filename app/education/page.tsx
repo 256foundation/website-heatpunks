@@ -47,11 +47,52 @@ export default function EducationPage() {
       <VideoSection year={2026} videos={summit2026Videos} sectionTag="[002]" />
       <VideoSection year={2025} videos={summit2025Videos} sectionTag="[003]" />
 
+      {/* Summit Archives Section */}
+      <section className="py-16 md:py-24 bg-[var(--card-background)] border-t border-[var(--card-border)]">
+        <div className="section-container">
+          <div className="mb-10">
+            <span className="section-tag">[004]</span>
+            <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2">
+              SUMMIT <span className="text-[var(--accent)]">ARCHIVES</span>
+            </h2>
+            <p className="text-[var(--muted)] text-sm mt-3 max-w-xl">
+              Full schedules, recordings, and materials from past Heatpunk Summits.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-2xl">
+            <Link
+              href="/summit/2026"
+              className="heatpunk-card group hover:border-[var(--accent)] transition-all hover:-translate-y-0.5"
+            >
+              <span className="font-mono text-xl font-extrabold text-[var(--accent)]">2026</span>
+              <p className="font-mono text-xs text-[var(--muted)] mt-1 mb-3">
+                Full schedule, 5 workshops, recordings, 256 Foundation announcement
+              </p>
+              <span className="font-mono text-[10px] text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
+                VIEW ARCHIVE →
+              </span>
+            </Link>
+            <Link
+              href="/summit/2025"
+              className="heatpunk-card group hover:border-[var(--terminal-color)] transition-all hover:-translate-y-0.5"
+            >
+              <span className="font-mono text-xl font-extrabold text-[var(--terminal-color)]">2025</span>
+              <p className="font-mono text-xs text-[var(--muted)] mt-1 mb-3">
+                Undermine — 14 talks, recap film, the first gathering
+              </p>
+              <span className="font-mono text-[10px] text-[var(--muted)] group-hover:text-[var(--terminal-color)] transition-colors">
+                VIEW ARCHIVE →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* More Resources Section */}
       <section className="py-16 md:py-24 bg-[var(--background-alt)] border-t border-[var(--card-border)]">
         <div className="section-container">
           <div className="mb-8">
-            <span className="section-tag">[004]</span>
+            <span className="section-tag">[005]</span>
             <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2 mb-4">
               MORE RESOURCES IN <span className="text-[var(--accent)]">DEVELOPMENT</span>
             </h2>

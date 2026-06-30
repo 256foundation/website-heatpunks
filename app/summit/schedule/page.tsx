@@ -4,11 +4,11 @@ import { ScheduleHeader } from '@/components/schedule/ScheduleHeader';
 import { DayTabs } from '@/components/schedule/DayTabs';
 
 export const metadata: Metadata = {
-  title: 'Summit Schedule',
-  description: 'Full schedule for Heatpunk Summit 2026. Workshops, demos, panels, and networking events.',
+  title: 'Summit 2026 Schedule',
+  description: 'Full schedule archive for Heatpunk Summit 2026. Workshops, demos, panels, and networking events.',
   openGraph: {
-    title: 'Summit Schedule | Hashrate Heatpunks',
-    description: 'Full schedule for Heatpunk Summit 2026. Workshops, demos, panels, and networking events.',
+    title: 'Summit 2026 Schedule | Hashrate Heatpunks',
+    description: 'Full schedule archive for Heatpunk Summit 2026. Workshops, demos, panels, and networking events.',
     images: ['/api/og?title=SUMMIT%20SCHEDULE&subtitle=FEB%2027-28%2C%202026%20%E2%80%A2%20DENVER%2C%20CO&page=summit'],
   },
 };
