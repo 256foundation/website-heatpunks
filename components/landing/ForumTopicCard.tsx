@@ -8,8 +8,6 @@ export function ForumTopicCard({ topic }: ForumTopicCardProps) {
   return (
     <a
       href={topic.url}
-      target="_blank"
-      rel="noopener noreferrer"
       className="block p-4 bg-[var(--card-background)] border border-[var(--card-border)] hover:border-[var(--accent)] transition-all group"
     >
       <h3 className="font-mono text-sm font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors mb-2 line-clamp-2">

@@ -23,8 +23,6 @@ export function GalleryImageCard({ image }: GalleryImageCardProps) {
   return (
     <a
       href={image.topicUrl}
-      target="_blank"
-      rel="noopener noreferrer"
       className="flex-shrink-0 group snap-start"
     >
       <div className="relative w-72 h-48 md:w-80 md:h-56 overflow-hidden border border-[var(--card-border)] bg-[var(--card-background)]">

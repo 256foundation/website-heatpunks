@@ -80,8 +80,7 @@ export function MobileNav() {
                 ) : item.external ? (
                   <a
                     href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    {...(item.newTab !== false ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     onClick={() => setIsOpen(false)}
                     className="flex items-center justify-between py-3 font-mono text-xs tracking-wider text-[var(--white)] hover:text-[var(--flame)] transition-colors"
                   >
@@ -89,7 +88,9 @@ export function MobileNav() {
                       <span className="text-[var(--flame)] mr-2">&gt;</span>
                       {item.name.toUpperCase()}
                     </span>
-                    <span className="text-[var(--terminal)] text-[10px]">↗</span>
+                    {item.newTab !== false && (
+                      <span className="text-[var(--terminal)] text-[10px]">↗</span>
+                    )}
                   </a>
                 ) : (
                   <Link

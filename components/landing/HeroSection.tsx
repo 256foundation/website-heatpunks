@@ -60,8 +60,6 @@ export function HeroSection() {
           </a>
           <a
             href={siteConfig.links.forum}
-            target="_blank"
-            rel="noopener noreferrer"
             className="btn-outline"
           >
             <span className="relative z-10">DIVE INTO FORUM</span>

@@ -20,8 +20,6 @@ export function LinksSection() {
           {/* Forum */}
           <a
             href={siteConfig.links.forum}
-            target="_blank"
-            rel="noopener noreferrer"
             className="heatpunk-card flex flex-col items-center gap-3 text-center hover:border-[var(--terminal-color)] hover:shadow-[0_0_20px_rgba(0,255,65,0.15)]"
           >
             <span className="text-2xl text-[var(--terminal-color)] font-mono">&gt;_</span>

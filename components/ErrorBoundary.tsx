@@ -55,8 +55,6 @@ export class ForumSectionErrorBoundary extends Component<ErrorBoundaryProps, Err
               </button>
               <a
                 href={siteConfig.links.forum}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="btn-secondary"
               >
                 <span className="font-mono text-xs tracking-wider">VISIT FORUM DIRECTLY</span>

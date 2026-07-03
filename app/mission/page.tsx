@@ -260,8 +260,6 @@ export default function MissionPage() {
             </Link>
             <a
               href={siteConfig.links.forum}
-              target="_blank"
-              rel="noopener noreferrer"
               className="btn-secondary"
             >
               JOIN THE FORUM

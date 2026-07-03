@@ -132,8 +132,6 @@ export function Footer() {
               </a>
               <a
                 href={siteConfig.links.forum}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >
                 COMMUNITY FORUM

@@ -21,8 +21,6 @@ export function CommunityGallery({ images }: CommunityGalleryProps) {
           </p>
           <a
             href={siteConfig.links.forum}
-            target="_blank"
-            rel="noopener noreferrer"
             className="btn-secondary inline-block"
           >
             <span className="font-mono text-xs tracking-wider">VISIT FORUM DIRECTLY</span>
@@ -64,8 +62,6 @@ export function CommunityGallery({ images }: CommunityGalleryProps) {
       <div className="section-container mt-6">
         <a
           href={siteConfig.links.forum}
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 font-mono text-xs tracking-wider text-[var(--accent)] hover:text-[var(--accent-light)] transition-colors"
         >
           <span>&gt;</span>

@@ -48,19 +48,19 @@ function NavItemComponent({ item }: { item: NavItem }) {
   if (!item.children) {
     if (item.external) {
       const isOutline = item.variant === 'outline';
+      const opensNewTab = item.newTab !== false;
       return (
         <a
           href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`font-mono text-xs tracking-wider px-3 py-1.5 inline-flex items-center gap-1 transition-colors ${
+          {...(opensNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          className={`font-mono text-xs tracking-wider px-3 py-1.5 inline-flex items-center gap-1 transition-colors whitespace-nowrap ${
             isOutline
               ? 'border border-[var(--accent)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-[var(--accent-contrast)]'
               : 'bg-[var(--accent)] text-[var(--accent-contrast)] hover:bg-[var(--accent-light)]'
           }`}
         >
           {item.name.toUpperCase()}
-          <span className="text-[10px]">↗</span>
+          {opensNewTab && <span className="text-[10px]">↗</span>}
         </a>
       );
     }

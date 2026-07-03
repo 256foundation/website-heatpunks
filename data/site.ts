@@ -42,6 +42,7 @@ export interface NavItem {
   name: string;
   href: string;
   external?: boolean;
+  newTab?: boolean;
   variant?: 'default' | 'outline';
   children?: NavItem[];
 }
@@ -52,7 +53,7 @@ export const navigation: NavItem[] = [
   { name: 'Education', href: '/education' },
   { name: 'Grants', href: '/grants' },
   { name: 'Summit', href: '/summit' },
-  { name: 'Forum', href: FORUM_URL, external: true },
+  { name: 'Forum', href: FORUM_URL, external: true, newTab: false },
   { name: 'Group Chat', href: TELEGRAM_URL, external: true },
   { name: 'Donate', href: DONATE_URL, external: true, variant: 'outline' },
 ];
