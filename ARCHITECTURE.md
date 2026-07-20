@@ -1,5 +1,29 @@
 # Hashrate Heatpunks Website Architecture
 
+> **Status: historical design document (as-designed architecture, early 2026).**
+> This captures the architecture the site was designed to, and is preserved as a design record.
+> The high-level shape (Next.js App Router · thin server layer · content-as-data · Docker standalone)
+> is still accurate, but some diagrams and file listings reflect the original intent rather than what
+> shipped. For the **current** as-built reference, use [CLAUDE.md](CLAUDE.md) and [README.md](README.md);
+> for the 2027 summit pivot, use [SPEC-summit-2027.md](SPEC-summit-2027.md).
+>
+> **Known divergences from what shipped:**
+> - **Email/SMTP:** the app uses Nodemailer over **Brevo** SMTP (`smtp-relay.brevo.com`), not Proton Mail
+>   (see the diagrams and ADR-004 below). All three forms (contact, grants, summit invitation) send to a
+>   single inbox, **admin@heatpunks.org** — the per-purpose contact@ / grants@ / summit@ recipients in the
+>   "Email Routing" table were never separated.
+> - **No `/api/forum` proxy route** (shown in the top diagram). The Discourse feed is fetched directly
+>   server-side in `lib/discourse.ts`.
+> - **Summit is now 2027.** ADR-009/-010 and the metadata tables reference "Summit 2026 / Feb 27–28, 2026";
+>   that event is now archived at `/summit/2026`, and `/summit` is the 2027 page. See SPEC-summit-2027.md.
+>   The summit hero/flow is `Summit2027Hero` + `WaitlistModal` (2027 waitlist).
+> - **Components designed but not built as separate files:** `ThemeProvider` (theme is CSS-only per ADR-006,
+>   no provider component), `Button.tsx`, `Card.tsx`, `TrackColumns.tsx`, `TextareaWithCounter.tsx` (counter
+>   logic is inlined in `GrantsForm`), and `data/navigation.ts`. The actual component tree is documented in
+>   CLAUDE.md / README.md.
+> - **The grant program is currently paused** via `data/site.ts → grants.open` (gates the form, the API
+>   route, and all "apply" CTAs in one flag).
+
 ## Overview
 
 This document defines the technical architecture for the Hashrate Heatpunks community website. The site serves as a hub for the hashrate heating community, featuring a landing page with live forum feed, educational resources, a grant application system for the 256 Foundation, and summit event pages with detailed schedules.

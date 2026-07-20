@@ -68,7 +68,7 @@ Routes: `/`, `/mission`, `/education`, `/grants`, `/summit` (2027, forward-looki
 
 The forum feed is fetched and cached from Discourse in `lib/discourse.ts` (the only file with a test suite: `lib/__tests__/discourse.test.ts`).
 
-For the full design, data models, and caching rationale, see [ARCHITECTURE.md](ARCHITECTURE.md) and [SPEC.md](SPEC.md). The 2027 pivot (2027 summit page + 2025/2026 archives) is specced in [SPEC-summit-2027.md](SPEC-summit-2027.md).
+For design rationale and data models, see [ARCHITECTURE.md](ARCHITECTURE.md) and [SPEC.md](SPEC.md) — but note these are **historical pre-launch design docs** (each carries a status banner listing where it has since diverged: Brevo SMTP not Proton, single admin@ inbox, no `/api/forum` route, etc.). The 2027 pivot (2027 summit page + 2025/2026 archives) is specced in [SPEC-summit-2027.md](SPEC-summit-2027.md), which is current.
 
 ## Environment
 

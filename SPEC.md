@@ -1,5 +1,28 @@
 # Hashrate Heatpunks Website Specification
 
+> **Status: historical design document (original pre-launch spec, early 2026).**
+> This is the requirements spec the site was originally built from. It is preserved as a
+> record of intent — much of it still holds, but the site has since shipped and evolved.
+> For the **current** state, treat these as authoritative instead:
+> - [SPEC-summit-2027.md](SPEC-summit-2027.md) — the 2027 summit pivot (supersedes all "Summit 2026" content below)
+> - [CLAUDE.md](CLAUDE.md) and [README.md](README.md) — the as-built stack, routes, and where content lives
+> - [ARCHITECTURE.md](ARCHITECTURE.md) — the design/architecture record (also carries a divergence note)
+>
+> **Known divergences from what shipped** (the body below is otherwise broadly accurate):
+> - **Summit is now 2027.** `/summit` is the forward-looking 2027 page (Feb 26–27, Denver); 2025 and
+>   2026 are rich archive pages at `/summit/2025` and `/summit/2026`. `/summit/[year]` still exists as a
+>   generic fallback but its `archivedYears` list is empty, so it 404s for every year. All "Summit 2026 /
+>   Feb 27–28, 2026" copy below describes what is now the 2026 archive.
+> - **The grant program is currently paused.** `data/site.ts → grants.open` gates the application form,
+>   the `/api/grants` route, and every "apply" CTA in one flag; while closed the page points to donations.
+> - **Email:** the SMTP provider is **Brevo** (`smtp-relay.brevo.com`), not Proton Mail. All three forms
+>   (contact, grants, summit invitation) deliver to a single inbox, **admin@heatpunks.org** — the separate
+>   contact@ / grants@ / summit@ inboxes described below were never split out.
+> - **No `/forum` redirect page and no `/api/forum` proxy route** exist. The forum feed is fetched
+>   server-side in `lib/discourse.ts`; the forum is otherwise linked directly to forum.heatpunks.org.
+> - **No `summit.heatpunks.org` DNS redirect** is part of this repo.
+> - The summit uses a **waitlist** flow (`WaitlistModal`) for 2027 alongside the invitation modal.
+
 ## Overview
 
 A community website for Hashrate Heatpunks - a community of bitcoiners and heating industry specialists advancing the hashrate heating industry (using bitcoin miners as heating appliances across residential, commercial, industrial, and district scales).
