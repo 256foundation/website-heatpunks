@@ -102,14 +102,12 @@ export default function EducationPage() {
               this content doesn&apos;t exist yet because we&apos;re the ones creating it.
             </p>
             <p className="text-[var(--muted)] text-sm leading-relaxed max-w-2xl mb-4">
-              Want to help build this industry? The 256 Foundation funds educational content,
-              documentation, and training materials through the Hashrate Heatpunk Grant Program.
-              {!siteConfig.grants.open && (
-                <>
-                  {' '}The program is paused while we raise dedicated funding - donations are what bring
-                  grants back.
-                </>
-              )}
+              Want to help build this industry? Our parent nonprofit, the 256 Foundation, funds
+              open-source Bitcoin mining and mining decentralization - and hashrate heating fits
+              squarely within that mission, including the educational content, documentation, and
+              training this space needs. The Foundation funds{' '}
+              <span className="text-[var(--foreground)]">open-source work only</span>, so anything a
+              grant produces - code, docs, or education - must be released publicly.
             </p>
             <p className="text-sm text-[var(--muted)] leading-relaxed max-w-2xl">
               Support this work —{' '}
@@ -125,22 +123,25 @@ export default function EducationPage() {
             </p>
           </div>
 
-          {siteConfig.grants.open ? (
-            <Link href="/grants" className="btn-primary group">
-              <span className="relative z-10">APPLY FOR A GRANT</span>
-              <span className="btn-heat" />
-            </Link>
-          ) : (
+          <div className="flex flex-wrap gap-3">
             <a
-              href={siteConfig.foundation.donate}
+              href={siteConfig.foundation.grants}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary group"
             >
-              <span className="relative z-10">DONATE TO FUND GRANTS ↗</span>
+              <span className="relative z-10">SEE THE GRANT PROGRAM ↗</span>
               <span className="btn-heat" />
             </a>
-          )}
+            <a
+              href={siteConfig.foundation.donate}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+            >
+              SUPPORT THE MISSION ↗
+            </a>
+          </div>
         </div>
       </section>
     </div>

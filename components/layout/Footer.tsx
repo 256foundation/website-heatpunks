@@ -106,12 +106,6 @@ export function Footer() {
                 EDUCATION
               </Link>
               <Link
-                href="/grants"
-                className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                GRANTS
-              </Link>
-              <Link
                 href="/summit"
                 className="font-mono text-xs text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >

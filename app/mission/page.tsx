@@ -53,7 +53,7 @@ const approaches = [
   },
   {
     title: 'Fund development',
-    description: 'Grants for standards, research, documentation',
+    description: '256 Foundation grants for open-source mining & heating work',
   },
   {
     title: 'Connect industries',
@@ -234,26 +234,14 @@ export default function MissionPage() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            {siteConfig.grants.open && (
-              <Link href="/grants" className="btn-primary group">
-                <span className="relative z-10">APPLY FOR A GRANT</span>
-                <span className="btn-heat" />
-              </Link>
-            )}
             <a
               href={siteConfig.foundation.donate}
               target="_blank"
               rel="noopener noreferrer"
-              className={siteConfig.grants.open ? 'btn-outline' : 'btn-primary group'}
+              className="btn-primary group"
             >
-              {siteConfig.grants.open ? (
-                'SUPPORT THE MISSION ↗'
-              ) : (
-                <>
-                  <span className="relative z-10">SUPPORT THE MISSION ↗</span>
-                  <span className="btn-heat" />
-                </>
-              )}
+              <span className="relative z-10">SUPPORT THE MISSION ↗</span>
+              <span className="btn-heat" />
             </a>
             <Link href="/education" className="btn-secondary">
               LEARN MORE

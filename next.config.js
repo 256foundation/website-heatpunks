@@ -17,6 +17,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/grants',
+        destination: 'https://www.256foundation.org/grants',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

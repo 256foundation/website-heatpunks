@@ -1,7 +1,7 @@
 // Single source of truth for external URLs
-const DONATE_URL = 'https://pay.zaprite.com/pl_TFoKMotEqk';
 const FORUM_URL = 'https://forum.heatpunks.org';
 const TELEGRAM_URL = 'https://t.me/heatpunks';
+const FOUNDATION_URL = 'https://256foundation.org';
 
 export const siteConfig = {
   name: 'Hashrate Heatpunks',
@@ -14,7 +14,7 @@ export const siteConfig = {
     twitter: 'https://x.com/HashHeatpunks',
     forum: FORUM_URL,
     nostr: 'https://primal.net/heatpunks',
-    foundation: 'https://256foundation.org',
+    foundation: FOUNDATION_URL,
     foundationGithub: 'https://github.com/256foundation',
   },
 
@@ -25,16 +25,10 @@ export const siteConfig = {
   foundation: {
     name: '256 Foundation',
     mission: 'building the open-source Bitcoin mining ecosystem',
-    url: 'https://256foundation.org',
+    url: FOUNDATION_URL,
     github: 'https://github.com/256foundation',
-    donate: DONATE_URL,
-  },
-
-  // Grant program status. Flip `open` to true to reopen applications:
-  // this re-enables the application form, the API endpoint, and the
-  // "apply" CTAs across the site in one change.
-  grants: {
-    open: false,
+    donate: 'https://www.256foundation.org/donate',
+    grants: 'https://www.256foundation.org/grants',
   },
 };
 
@@ -51,9 +45,8 @@ export const navigation: NavItem[] = [
   { name: 'Home', href: '/' },
   { name: 'Mission', href: '/mission' },
   { name: 'Education', href: '/education' },
-  { name: 'Grants', href: '/grants' },
   { name: 'Summit', href: '/summit' },
   { name: 'Forum', href: FORUM_URL, external: true, newTab: false },
   { name: 'Group Chat', href: TELEGRAM_URL, external: true },
-  { name: 'Donate', href: DONATE_URL, external: true, variant: 'outline' },
+  { name: '256 Foundation', href: FOUNDATION_URL, external: true, variant: 'outline' },
 ];

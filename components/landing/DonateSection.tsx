@@ -63,7 +63,7 @@ export function DonateSection() {
             rel="noopener noreferrer"
             className="btn-primary group"
           >
-            <span className="relative z-10">DONATE TO SUPPORT GRANTS ↗</span>
+            <span className="relative z-10">DONATE ↗</span>
             <span className="btn-heat" />
           </a>
           <a

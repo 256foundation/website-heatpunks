@@ -4,7 +4,9 @@ Guidance for Claude Code when working in this repository.
 
 ## What this is
 
-The community website for the **Hashrate Heatpunks**, a project of the [256 Foundation](https://256foundation.org). Live at [heatpunks.org](https://heatpunks.org). It's the hub for the community: a landing page with a live forum feed, educational resources (books, guides, summit talk videos), the Hashrate Heatpunk Grant Program, and Heatpunk Summit event pages with full schedules.
+The community website for the **Hashrate Heatpunks**, a project of the [256 Foundation](https://256foundation.org). Live at [heatpunks.org](https://heatpunks.org). It's the hub for the community: a landing page with a live forum feed, educational resources (books, guides, summit talk videos), and Heatpunk Summit event pages with full schedules.
+
+**Grants note:** Heatpunks does **not** run its own grant program. Grants are run by the parent [256 Foundation](https://256foundation.org/grants) (open-source Bitcoin mining & decentralization; funds open-source work only). The Heatpunks site only *describes* that program and links out to it — there is no `/grants` page, grants form, or grants API here. `/grants` 308-redirects to `256foundation.org/grants` (see `next.config.js`). See [SPEC-grants-256foundation.md](SPEC-grants-256foundation.md).
 
 **Stack:** Next.js 14 (App Router) · React 18 · TypeScript · Tailwind CSS · Nodemailer (SMTP) · Discourse (read-only API proxy) · Jest + React Testing Library · Docker (standalone output).
 
@@ -32,11 +34,10 @@ Common edits and exactly where they live:
 | To change… | Edit |
 |---|---|
 | External URLs, nav, social links, contact email, foundation info | `data/site.ts` |
-| **Grant program open/closed** | `data/site.ts` → `grants.open` (gates the form, the API route, and every "apply" CTA in one flag) |
+| 256 Foundation grants/donate links (used by re-framed grants copy) | `data/site.ts` → `foundation.grants` / `foundation.donate` |
 | Summit talk / recap videos | `data/videos.ts` (Summit page features entry 0; Education page lists all) |
 | Summit schedule | `data/schedule.yaml` |
 | Summit sponsors | `data/sponsors.yaml` |
-| Grant categories / FAQ copy | `data/grants.ts` |
 | 2025 / 2027 summit archive content | `data/summit2025.ts` / `data/summit2027.ts` |
 | Info-deck carousel slides | `data/infoDeck.ts` (+ images in `public/images/info-deck/`) |
 
@@ -48,9 +49,9 @@ Single Next.js app: mostly static pages plus a thin server layer for email, the 
 
 ```
 app/            App Router pages + API routes
-  api/          contact · grants · summit-invitation · og
+  api/          contact · summit-invitation · og
 components/     React components, grouped by section:
-                landing · education · grants · summit · schedule · layout · shared
+                landing · education · summit · schedule · layout · shared
 lib/            Server-side helpers: email · discourse · calendar · schedule · scheduleUtils · utils
 data/           Site content + config as TS/YAML (see table above)
 types/          Shared TypeScript types
@@ -60,10 +61,10 @@ public/         Static assets: images, downloadable PDFs
 
 **Pages** are React Server Components; interactive pieces (video carousel, forms, expandable schedule cards, mobile nav, modals) are client components.
 
-Routes: `/`, `/mission`, `/education`, `/grants`, `/summit` (2027, forward-looking), `/summit/2025`, `/summit/2026` (rich archives), `/summit/schedule`, and `/summit/[year]` (a generic archive fallback — its `archivedYears` list is currently empty, so it 404s for all years).
+Routes: `/`, `/mission`, `/education`, `/summit` (2027, forward-looking), `/summit/2025`, `/summit/2026` (rich archives), `/summit/schedule`, and `/summit/[year]` (a generic archive fallback — its `archivedYears` list is currently empty, so it 404s for all years). `/grants` is not a page — it 308-redirects to `256foundation.org/grants` (`next.config.js`).
 
 **API routes:**
-- `POST /api/contact`, `POST /api/grants`, `POST /api/summit-invitation` — validate input, send email via `lib/email.ts`.
+- `POST /api/contact`, `POST /api/summit-invitation` — validate input, send email via `lib/email.ts`.
 - `GET /api/og` — generates Open Graph social images on the fly.
 
 The forum feed is fetched and cached from Discourse in `lib/discourse.ts` (the only file with a test suite: `lib/__tests__/discourse.test.ts`).

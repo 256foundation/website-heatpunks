@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { siteConfig } from '@/data/site';
 
 const grantFocusAreas = [
@@ -19,14 +18,19 @@ export function GrantsSection() {
             FUND THE <span className="text-[var(--accent)]">FUTURE</span>
           </h2>
           <p className="text-[var(--muted)] mt-2 text-sm max-w-2xl">
-            The Hashrate Heatpunk Grant Program funds foundational work accelerating open-source mining and
-            hashrate heating - standards, research, documentation, and education.
-            {!siteConfig.grants.open && (
-              <>
-                {' '}Applications are paused while we raise dedicated funding; your donation is what brings
-                them back.
-              </>
-            )}
+            Grants are run by our parent nonprofit, the{' '}
+            <a
+              href={siteConfig.foundation.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--terminal-color)] hover:text-[var(--accent)] transition-colors"
+            >
+              256 Foundation
+            </a>
+            , which funds open-source Bitcoin mining and mining decentralization - and hashrate heating
+            fits squarely within that mission. One condition: the Foundation funds{' '}
+            <span className="text-[var(--foreground)]">open-source work only</span>, so whatever you
+            build, document, or teach with a grant must be released publicly.
           </p>
         </div>
 
@@ -41,27 +45,15 @@ export function GrantsSection() {
         </div>
 
         {/* CTA */}
-        {siteConfig.grants.open ? (
-          <Link href="/grants" className="btn-primary group">
-            <span className="relative z-10">APPLY FOR GRANT</span>
-            <span className="btn-heat" />
-          </Link>
-        ) : (
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={siteConfig.foundation.donate}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary group"
-            >
-              <span className="relative z-10">DONATE TO FUND GRANTS ↗</span>
-              <span className="btn-heat" />
-            </a>
-            <Link href="/grants" className="btn-outline">
-              PROGRAM DETAILS
-            </Link>
-          </div>
-        )}
+        <a
+          href={siteConfig.foundation.grants}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary group"
+        >
+          <span className="relative z-10">SEE THE GRANT PROGRAM ↗</span>
+          <span className="btn-heat" />
+        </a>
       </div>
     </section>
   );
