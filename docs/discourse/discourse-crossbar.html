@@ -1,0 +1,209 @@
+<!--
+  Paste this into: Discourse Admin → Customize → Themes → your "Heatpunks Brand"
+  component → Edit CSS/HTML → "Header" tab (renders ABOVE Discourse's native header,
+  so it reads as "you're entering the forum section of heatpunks.org").
+
+  Self-contained: no dependency on the main site's CSS variables or build.
+  Colors/fonts are hardcoded to match app/globals.css light-mode ("Warm Heated Paper") values.
+-->
+<div id="hp-crossbar">
+  <div class="hp-inner">
+    <a href="https://heatpunks.org/" class="hp-brand">
+      <img src="https://heatpunks.org/images/logo.png" width="40" height="40" alt="Hashrate Heatpunks">
+      <span class="hp-brand-text">HASHRATE HEATPUNKS</span>
+    </a>
+
+    <nav class="hp-nav-desktop">
+      <a href="https://heatpunks.org/">HOME</a>
+      <a href="https://heatpunks.org/mission">MISSION</a>
+      <a href="https://heatpunks.org/education">EDUCATION</a>
+      <a href="https://heatpunks.org/grants">GRANTS</a>
+      <a href="https://heatpunks.org/summit">SUMMIT</a>
+      <a href="https://forum.heatpunks.org" class="hp-cta-fill">FORUM<span class="hp-arrow">↗</span></a>
+      <a href="https://t.me/heatpunks" target="_blank" rel="noopener noreferrer" class="hp-cta-fill">GROUP CHAT<span class="hp-arrow">↗</span></a>
+      <a href="https://pay.zaprite.com/pl_TFoKMotEqk" target="_blank" rel="noopener noreferrer" class="hp-cta-outline">DONATE<span class="hp-arrow">↗</span></a>
+    </nav>
+
+    <button id="hp-burger" aria-label="Open menu" aria-expanded="false">
+      <svg id="hp-burger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="hp-mobile-menu">
+    <a href="https://heatpunks.org/"><span class="hp-chevron">&gt;</span>HOME</a>
+    <a href="https://heatpunks.org/mission"><span class="hp-chevron">&gt;</span>MISSION</a>
+    <a href="https://heatpunks.org/education"><span class="hp-chevron">&gt;</span>EDUCATION</a>
+    <a href="https://heatpunks.org/grants"><span class="hp-chevron">&gt;</span>GRANTS</a>
+    <a href="https://heatpunks.org/summit"><span class="hp-chevron">&gt;</span>SUMMIT</a>
+    <a href="https://forum.heatpunks.org" class="hp-external"><span><span class="hp-chevron">&gt;</span>FORUM</span><span class="hp-term-arrow">↗</span></a>
+    <a href="https://t.me/heatpunks" target="_blank" rel="noopener noreferrer" class="hp-external"><span><span class="hp-chevron">&gt;</span>GROUP CHAT</span><span class="hp-term-arrow">↗</span></a>
+    <a href="https://pay.zaprite.com/pl_TFoKMotEqk" target="_blank" rel="noopener noreferrer" class="hp-external"><span><span class="hp-chevron">&gt;</span>DONATE</span><span class="hp-term-arrow">↗</span></a>
+  </div>
+</div>
+
+<style>
+  #hp-crossbar {
+    font-family: 'JetBrains Mono', 'Consolas', monospace;
+    position: relative;
+    z-index: 1000;
+    background: #faf8f5;
+    border-bottom: 1px solid #e8e4de;
+  }
+  #hp-crossbar .hp-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #hp-crossbar .hp-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+  #hp-crossbar .hp-brand img {
+    height: 32px;
+    width: auto;
+  }
+  #hp-crossbar .hp-brand-text {
+    display: none;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #2d2a26;
+  }
+  #hp-crossbar .hp-brand:hover .hp-brand-text {
+    color: #c94e00;
+  }
+  #hp-crossbar .hp-nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  #hp-crossbar .hp-nav-desktop > a {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    padding: 0.5rem 0.75rem;
+    color: #4a4640;
+    text-decoration: none;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  #hp-crossbar .hp-nav-desktop > a:hover {
+    color: #c94e00;
+  }
+  #hp-crossbar .hp-cta-fill,
+  #hp-crossbar .hp-cta-outline {
+    padding: 0.375rem 0.75rem !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  #hp-crossbar .hp-cta-fill {
+    background: #c94e00;
+    color: #fffcf7 !important;
+  }
+  #hp-crossbar .hp-cta-fill:hover {
+    background: #ff6b00;
+    color: #fffcf7 !important;
+  }
+  #hp-crossbar .hp-cta-outline {
+    border: 1px solid #c94e00;
+    color: #c94e00 !important;
+  }
+  #hp-crossbar .hp-cta-outline:hover {
+    background: #c94e00;
+    color: #fffcf7 !important;
+  }
+  #hp-crossbar .hp-arrow {
+    font-size: 10px;
+  }
+  #hp-crossbar #hp-burger {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    color: #888888;
+    cursor: pointer;
+  }
+  #hp-crossbar #hp-burger:hover {
+    color: #ff6b00;
+  }
+  #hp-mobile-menu {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: #2d2a26;
+    border-bottom: 1px solid #e8e4de;
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+    animation: hpFadeIn 0.3s ease-out;
+  }
+  #hp-mobile-menu.hp-open {
+    display: flex;
+  }
+  #hp-mobile-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: #faf8f5;
+    text-decoration: none;
+    border-bottom: 1px solid #e8e4de1a;
+  }
+  #hp-mobile-menu a:last-child {
+    border-bottom: none;
+  }
+  #hp-mobile-menu a:hover {
+    color: #c94e00;
+  }
+  #hp-mobile-menu .hp-chevron {
+    color: #c94e00;
+    margin-right: 0.5rem;
+  }
+  #hp-mobile-menu .hp-term-arrow {
+    color: #008f24;
+    font-size: 10px;
+  }
+
+  @keyframes hpFadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Tailwind's sm breakpoint = 640px, md = 768px — matched exactly */
+  @media (min-width: 640px) {
+    #hp-crossbar .hp-brand-text { display: block; }
+  }
+  @media (min-width: 768px) {
+    #hp-crossbar .hp-nav-desktop { display: flex; }
+    #hp-crossbar #hp-burger { display: none; }
+  }
+  @media (max-width: 767px) {
+    #hp-crossbar .hp-nav-desktop { display: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    var burger = document.getElementById('hp-burger');
+    var menu = document.getElementById('hp-mobile-menu');
+    var icon = document.getElementById('hp-burger-icon');
+    if (!burger || !menu) return;
+    burger.addEventListener('click', function () {
+      var isOpen = menu.classList.toggle('hp-open');
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      icon.innerHTML = isOpen
+        ? '<path d="M6 18L18 6M6 6l12 12" />'
+        : '<path d="M4 6h16M4 12h16M4 18h16" />';
+    });
+  })();
+</script>

@@ -41,7 +41,7 @@ Next.js server (Docker container)
 
 **Request flow at a glance:**
 
-- **Pages** (`/`, `/mission`, `/education`, `/grants`, `/summit`, `/summit/[year]`, `/summit/schedule`) are React Server Components. Interactive pieces (video carousel, forms, expandable schedule cards, mobile nav) are client components.
+- **Pages** (`/`, `/mission`, `/education`, `/grants`, `/summit` (the 2027 summit), `/summit/2025` and `/summit/2026` (rich archives), `/summit/schedule`) are React Server Components. Interactive pieces (video carousel, forms, expandable schedule cards, mobile nav, modals) are client components. A generic `/summit/[year]` fallback route also exists for future archives.
 - **API routes** handle the dynamic work:
   - `POST /api/contact`, `POST /api/grants`, `POST /api/summit-invitation` — validate input and send email via `lib/email.ts`.
   - `GET /api/og` — generates Open Graph social images on the fly.

@@ -29,3 +29,4 @@ npm-debug.log*
 .cache/
 .parcel-cache/
 .swc/
+docs/planning/
