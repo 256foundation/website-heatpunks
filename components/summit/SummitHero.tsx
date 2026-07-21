@@ -14,7 +14,7 @@ export function SummitHero({ workshopCount, sponsorCount }: SummitHeroProps) {
 
   return (
     <>
-      <section className="relative flex min-h-[68vh] items-end overflow-hidden">
+      <section className="relative flex min-h-[68vh] items-end overflow-hidden pt-16 md:pt-20">
         {/* Thermal-camera hero photo (2026 event branding) */}
         <Image
           src="/images/summit/2026/hero-thermal.jpg"
