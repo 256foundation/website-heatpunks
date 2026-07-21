@@ -49,19 +49,19 @@ export function HeroSection() {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <div className="flex flex-col lg:flex-row gap-3 justify-center items-center w-full max-w-xs mx-auto lg:max-w-none">
           <a
             href={siteConfig.foundation.donate}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline"
+            className="btn-outline w-full lg:w-auto whitespace-nowrap text-center"
           >
             SUPPORT THE MISSION ↗
           </a>
 
           <a
             href={siteConfig.links.forum}
-            className="btn-outline"
+            className="btn-outline w-full lg:w-auto whitespace-nowrap text-center"
           >
             DIVE INTO FORUM
           </a>
@@ -70,16 +70,16 @@ export function HeroSection() {
             href={siteConfig.links.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline"
+            className="btn-outline w-full lg:w-auto whitespace-nowrap text-center"
           >
             JOIN TELEGRAM
           </a>
 
-          <Link href="/summit" className="btn-outline">
+          <Link href="/summit" className="btn-outline w-full lg:w-auto whitespace-nowrap text-center">
             ATTEND SUMMIT
           </Link>
 
-          <Link href="/education" className="btn-outline">
+          <Link href="/education" className="btn-outline w-full lg:w-auto whitespace-nowrap text-center">
             LEARN
           </Link>
         </div>
