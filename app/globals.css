@@ -563,3 +563,34 @@ input:focus, textarea:focus, select:focus {
     color: var(--white);
   }
 }
+
+/* ========================================
+   2025 SUMMIT ARCHIVE ("Undermine")
+   ======================================== */
+
+/* Slowly rotating fan/turbine motif behind the hero. */
+@keyframes hps25-fan-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.hps25-fan-spin {
+  transform-origin: 50% 50%;
+  animation: hps25-fan-spin 60s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hps25-fan-spin { animation: none !important; }
+}
+
+/* Metallic "UNDER | MINE" wordmark — theme-aware gradient text.
+   Silver on the dark base; graphite/steel on the light base for contrast. */
+.hps25-metallic {
+  background-image: linear-gradient(155deg, #f4f5f7 0%, #9aa0a6 42%, #ffffff 52%, #7c8085 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@media (prefers-color-scheme: light) {
+  .hps25-metallic {
+    background-image: linear-gradient(155deg, #3a3a3a 0%, #7a7a7a 42%, #2c2c2c 52%, #565656 100%);
+  }
+}
