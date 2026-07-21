@@ -11,13 +11,10 @@ export function SponsorGrid({ sponsors }: SponsorGridProps) {
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-12">
-          <span className="section-tag">[SPONSORS]</span>
+          <span className="section-tag">[006]</span>
           <h3 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2 mb-4">
-            SUMMIT <span className="text-[var(--accent)]">SPONSORS</span>
+            HPS 2026 <span className="text-[var(--heatpunk-yellow-color)]">SPONSORS</span> — THANK YOU.
           </h3>
-          <p className="text-[var(--muted)] text-sm">
-            Thank you to our sponsors for making this event possible.
-          </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -61,15 +58,15 @@ export function SponsorGrid({ sponsors }: SponsorGridProps) {
           ))}
         </div>
 
-        {/* Become a sponsor CTA */}
+        {/* Cross-year sponsor CTA */}
         <div className="mt-12 pt-8 border-t border-[var(--card-border)] text-center">
           <p className="font-mono text-xs text-[var(--muted)]">
-            <span className="text-[var(--terminal-color)]">&gt;</span> Interested in sponsoring?{' '}
+            Want to sponsor the next summit?{' '}
             <a
-              href="mailto:admin@heatpunks.org?subject=Summit Sponsorship"
+              href="/summit"
               className="text-[var(--accent)] hover:text-[var(--accent-light)] transition-colors"
             >
-              Contact us
+              → HPS 2027
             </a>
           </p>
         </div>

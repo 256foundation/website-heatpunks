@@ -6,7 +6,7 @@ const summits = [
     name: 'Heatpunk Summit 2026',
     href: '/summit/2026',
     color: 'var(--accent)',
-    description: 'The 256 Foundation was announced. More polished demos, more experts. ASHRAE and DOE professionals on the floor. The year the movement formalized.',
+    description: 'Heatpunks became a formal project of the 256 Foundation. More polished demos, more experts. ASHRAE and DOE professionals on the floor. The year the movement formalized.',
     stat1: { value: '150+', label: 'ATTENDEES' },
     stat2: { value: '5', label: 'WORKSHOPS' },
   },

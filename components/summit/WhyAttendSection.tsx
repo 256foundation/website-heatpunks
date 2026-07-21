@@ -10,7 +10,7 @@ const summitArc = [
     year: '2026',
     label: 'THE FOUNDATION',
     headline: 'Formalizing the Movement',
-    body: 'The second summit showed what organization looks like. More polished demo systems. More expertise. Professionals from ASHRAE and the DOE. Mining firmware developers. Building engineers. The 256 Foundation — a 501(c)(3) — was announced at this summit to fund the open-source mining stack: FOSS firmware, open hardware reference designs, and a documented open-source mining pool implementation.',
+    body: 'The second summit showed what organization looks like. More polished demo systems. More expertise. Professionals from ASHRAE and the DOE. Mining firmware developers. Building engineers. And Hashrate Heatpunks became a formal community project of the 256 Foundation — the 501(c)(3) building the open-source mining stack — with summit host Tyler Stevens named president of its board, giving the community a real organizational home.',
     color: 'var(--accent)',
   },
   {

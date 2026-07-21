@@ -25,6 +25,7 @@
   --red: #ff3d00;
   --terminal: #00ff41;
   --bitcoin: #f7931a;
+  --heatpunk-yellow: #f9ed32;
 
   /* Light mode palette - Warm/Heated Paper */
   --cream: #faf8f5;
@@ -36,6 +37,7 @@
   --charcoal-light: #4a4640;
   --ember: #c94e00;
   --terminal-dark: #008f24;
+  --heatpunk-yellow-dark: #8a6d00;
 
   /* Fonts */
   --font-mono: 'JetBrains Mono', 'Consolas', monospace;
@@ -55,6 +57,7 @@
   --accent-light: var(--flame-light);
   --accent-contrast: var(--black);
   --terminal-color: var(--terminal);
+  --heatpunk-yellow-color: var(--heatpunk-yellow);
   --tag-background: var(--gray);
   --tag-text: var(--white);
   --input-background: var(--dark-alt);
@@ -85,6 +88,7 @@
     --accent-light: var(--flame);
     --accent-contrast: var(--warm-white);
     --terminal-color: var(--terminal-dark);
+    --heatpunk-yellow-color: var(--heatpunk-yellow-dark);
     --tag-background: var(--warm-gray);
     --tag-text: var(--charcoal);
     --input-background: var(--warm-white);
