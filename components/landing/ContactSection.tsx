@@ -6,7 +6,7 @@ export function ContactSection() {
       <div className="section-container">
         {/* Section header */}
         <div className="mb-8">
-          <span className="section-tag">[004]</span>
+          <span className="section-tag">[006]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide">
             GET IN TOUCH
           </h2>

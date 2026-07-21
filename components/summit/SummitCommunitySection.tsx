@@ -1,12 +1,16 @@
 import { siteConfig } from '@/data/site';
 
-export function SummitCommunitySection() {
+interface SummitCommunitySectionProps {
+  sectionTag?: string;
+}
+
+export function SummitCommunitySection({ sectionTag = '[007]' }: SummitCommunitySectionProps) {
   return (
     <section className="py-16 md:py-24 bg-[var(--background)] border-t border-b border-[var(--card-border)]">
       <div className="section-container">
         {/* Section header */}
         <div className="text-center mb-8">
-          <span className="section-tag">[007]</span>
+          <span className="section-tag">{sectionTag}</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2">
             JOIN THE <span className="text-[var(--accent)]">COMMUNITY</span>
           </h2>

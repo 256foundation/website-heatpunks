@@ -6,7 +6,7 @@ export function LinksSection() {
       <div className="section-container">
         {/* Section header */}
         <div className="mb-12">
-          <span className="section-tag">[002]</span>
+          <span className="section-tag">[003]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide">
             JOIN THE COMMUNITY
           </h2>

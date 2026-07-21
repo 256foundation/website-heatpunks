@@ -1,63 +1,34 @@
-import type { Summit, ScheduleData } from '@/types/schedule';
-import { getEventTiming, formatTime } from '@/lib/scheduleUtils';
+import type { Summit } from '@/types/schedule';
 
 interface DetailsSectionProps {
   summit: Summit;
-  scheduleData: ScheduleData;
 }
 
-export function DetailsSection({ summit, scheduleData }: DetailsSectionProps) {
-  const timing = getEventTiming(scheduleData);
-
-  // Get happy hour link from schedule data
-  const happyHourSession = scheduleData.days
-    .flatMap(day => day.sessions)
-    .find(session => session.id === 'presummit-happy-hour');
-  const happyHourLink = happyHourSession?.link || 'https://luma.com/j4sh7s8s';
-
+export function DetailsSection({ summit }: DetailsSectionProps) {
   return (
-    <section className="py-16 md:py-24 bg-[var(--background)]">
+    <section className="bg-[var(--background)] py-16 md:py-24">
       <div className="section-container">
-        <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+        <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
           {/* When */}
-          <div className="bg-[var(--card-background)] border-l-[3px] border-l-[var(--accent)] p-5">
-            <h3 className="font-mono text-xs text-[var(--terminal-color)] mb-3">&gt; WHEN</h3>
-            <p className="text-sm text-[var(--muted)] leading-relaxed">
-              <strong className="text-[var(--foreground)] block mb-1">Feb 27-28, {summit.year}</strong>
-              Pre-Summit: Feb 26 - Ski Day + Evening Happy Hour<br />
-              Doors, Registration & Breakfast: {formatTime(timing.doorsOpen)} MT<br />
-              Welcome & Programming Start: {formatTime(timing.welcomeTime)} MT<br />
-              Programming ends: {formatTime(timing.programmingEnd)} MT Saturday<br />
-              2x Evening Activities: <a href="https://maps.app.goo.gl/mqee1thTBQXGHgaa8" target="_blank" rel="noopener noreferrer" className="text-[var(--accent)] hover:underline">RiNo Beer Garden</a> Dinner & Hot Tub BBQ<br />
+          <div className="border-l-[3px] border-l-[var(--heatpunk-yellow-color)] bg-[var(--card-background)] p-5">
+            <h3 className="mb-3 font-mono text-xs text-[var(--heatpunk-yellow-color)]">&gt; WHEN</h3>
+            <p className="text-sm leading-relaxed text-[var(--muted)]">
+              <strong className="mb-1 block text-[var(--foreground)]">Feb 27–28, {summit.year}</strong>
+              Pre-summit ski day and a public happy hour ran Feb 26. The summit itself ran two
+              full days, with an evening activity each night — a RiNo beer garden dinner and a
+              hot tub BBQ.
             </p>
           </div>
 
           {/* Where */}
-          <div className="bg-[var(--card-background)] border-l-[3px] border-l-[var(--accent)] p-5">
-            <h3 className="font-mono text-xs text-[var(--terminal-color)] mb-3">&gt; WHERE</h3>
-            <p className="text-sm text-[var(--muted)] leading-relaxed">
-              <strong className="text-[var(--foreground)] block mb-1">{summit.venue.name}</strong>
-              {summit.venue.address}<br />
-              RiNo District - Train from DIA<br />
-              Hotels, restaurants nearby
+          <div className="border-l-[3px] border-l-[var(--heatpunk-yellow-color)] bg-[var(--card-background)] p-5">
+            <h3 className="mb-3 font-mono text-xs text-[var(--heatpunk-yellow-color)]">&gt; WHERE</h3>
+            <p className="text-sm leading-relaxed text-[var(--muted)]">
+              <strong className="mb-1 block text-[var(--foreground)]">{summit.venue.name}</strong>
+              {summit.venue.address}
+              <br />
+              RiNo District — a short train ride from DIA.
             </p>
-          </div>
-        </div>
-
-        {/* Public Happy Hour */}
-        <div className="mt-6 max-w-4xl mx-auto">
-          <div className="bg-[var(--card-background)] border-2 border-[var(--terminal-color)] p-5 relative">
-            <div className="absolute -top-2.5 left-4 bg-[var(--terminal-color)] text-[var(--background)] font-mono text-[10px] font-bold px-3 py-0.5 tracking-wider">
-              OPEN TO ALL
-            </div>
-            <div>
-              <h3 className="font-mono text-sm font-bold text-[var(--foreground)] mb-1">
-                Welcome Happy Hour — Feb 26, 5-8 PM
-              </h3>
-              <p className="text-sm text-[var(--muted)]">
-                The community came together the evening before the summit — no ticket required.
-              </p>
-            </div>
           </div>
         </div>
       </div>

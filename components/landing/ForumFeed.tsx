@@ -14,7 +14,7 @@ export function ForumFeed({ topics }: ForumFeedProps) {
         <div className="section-container text-center">
           <span className="section-tag">[001]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-4">
-            COMMUNITY DISCUSSIONS
+            RECENT DISCUSSIONS
           </h2>
           <p className="text-[var(--muted)] mt-4 mb-6">
             Forum topics temporarily unavailable. Check back soon!
@@ -37,7 +37,7 @@ export function ForumFeed({ topics }: ForumFeedProps) {
         <div className="mb-8">
           <span className="section-tag">[001]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide">
-            COMMUNITY DISCUSSIONS
+            RECENT DISCUSSIONS
           </h2>
           <p className="text-[var(--muted)] mt-2 text-sm">
             Join the conversation. Discuss hashrate heating projects, share ideas, connect with builders.

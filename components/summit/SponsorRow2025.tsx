@@ -14,7 +14,7 @@ export function SponsorRow2025({ sponsors }: SponsorRow2025Props) {
     <section className="border-t border-[var(--card-border)] bg-[var(--card-background)] py-16 md:py-24">
       <div className="section-container">
         <div className="mb-12 text-center">
-          <span className="section-tag">[SPONSORS]</span>
+          <span className="section-tag">[003]</span>
           <h3 className="mt-2 mb-4 font-mono text-2xl md:text-3xl font-bold tracking-wide">
             SUMMIT <span className="text-[var(--terminal-color)]">SPONSORS</span>
           </h3>

@@ -143,7 +143,7 @@ export default function Summit2025Page() {
 
       {/* Community — shared component, scope green accent to this page only */}
       <div style={{ '--accent': 'var(--terminal-color)' } as CSSProperties}>
-        <SummitCommunitySection />
+        <SummitCommunitySection sectionTag="[004]" />
       </div>
 
       {/* Cross-year navigation footer — orange CTAs */}

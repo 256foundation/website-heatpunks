@@ -1,81 +1,79 @@
-export function AboutSection() {
-  const attendees = [
-    { tag: 'ASIC DESIGNERS', desc: 'Building the next generation of mining hardware' },
-    { tag: 'FOSS DEVS', desc: 'Open source firmware and control systems' },
-    { tag: 'SYSTEM BUILDERS', desc: 'Complete hashrate heating solutions' },
-    { tag: 'PLEB MINERS', desc: 'Home miners heating with hashrate' },
-    { tag: 'HOME BUILDERS', desc: 'Architects designing mining-heated homes' },
-    { tag: 'HVAC TECHS', desc: 'Integrating ASICs into heating systems' },
-    { tag: 'PLUMBERS', desc: 'Hydronic and radiant floor specialists' },
-    { tag: 'INSURERS', desc: 'Coverage for mining heating systems' },
-    { tag: 'ENERGY MODELERS', desc: 'Optimizing heat and power efficiency' },
-    { tag: 'CONTROL EXPERTS', desc: 'Automation and smart home integration' },
-  ];
+const attendees = [
+  'ASIC Designers',
+  'FOSS Devs',
+  'System Builders',
+  'Pleb Miners',
+  'Home Builders',
+  'Architects',
+  'HVAC Techs',
+  'Plumbers',
+  'Insurers',
+  'Energy Modelers',
+  'Control Experts',
+];
 
+const whyTheyCame = [
+  { title: 'Saw Innovation:', text: 'New systems, products, software, and live demos on the floor' },
+  { title: 'Solved Challenges:', text: 'Builders tackled real-world hurdles together in hands-on workshops' },
+  { title: 'Connected:', text: 'Met hyper-focused builders pushing hashrate heating forward' },
+];
+
+export function AboutSection() {
   return (
-    <section className="py-16 md:py-24 bg-[var(--background)] border-t border-[var(--card-border)]">
+    <section className="border-t border-[var(--card-border)] bg-[var(--background)] py-16 md:py-24">
       <div className="section-container">
         {/* Section header */}
         <div className="mb-12">
           <span className="section-tag">[001]</span>
-          <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2 mb-4">
-            WHAT IS HEATPUNK?
+          <h2 className="mt-2 mb-4 font-mono text-2xl font-bold tracking-wide md:text-3xl">
+            WHAT WAS <span className="text-[var(--heatpunk-yellow-color)]">HEATPUNK 2026</span>
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* About text */}
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Narrative */}
           <div>
-            <p className="text-[var(--foreground)] text-lg leading-relaxed mb-4">
-              The Heatpunks are bitcoiners <span className="text-highlight">undermining the status-quo</span>,
-              bringing hashrate back home into heating appliances and infrastructure.
+            <p className="mb-4 text-lg leading-relaxed text-[var(--foreground)]">
+              If 2025 was the spark — the first time this community had ever been in the same
+              room — <span className="text-highlight">2026 was proof it stuck</span>. The
+              Heatpunks came back organized: a website, a forum, and a full year of building
+              behind them.
             </p>
-            <p className="text-[var(--muted)] text-sm leading-relaxed mb-8">
-              This summit brought together all key stakeholders pushing forward the emerging industry
-              of hashrate heating. ASIC Designers, FOSS Developers, Firmware Builders, Control Experts,
-              Heating Industry Veterans, Plumbers, HVAC Techs, Home Insurers, System Builders,
-              Pleb Miners and more — <span className="text-highlight">All in the Same Room.</span>
+            <p className="mb-8 text-sm leading-relaxed text-[var(--muted)]">
+              For the first time, HPS introduced <strong className="text-[var(--foreground)]">hands-on
+              workshops</strong> — not just talks and panels, but sessions where builders solved
+              real problems together. More hashrate heating systems hit the demo floor than ever
+              before, more polished than 2025&apos;s. And the <strong className="text-[var(--foreground)]">first-ever
+              Heatpunk Innovation Award</strong> was handed out to the system that stole the show
+              (more on that below).
             </p>
 
-            {/* Objectives */}
             <div>
-              <h3 className="font-mono text-xs tracking-wider text-[var(--terminal-color)] mb-4">
-                &gt; OBJECTIVES
+              <h3 className="mb-4 font-mono text-xs tracking-wider text-[var(--heatpunk-yellow-color)]">
+                &gt; WHY THEY CAME
               </h3>
               <ul className="space-y-3">
-                <li className="flex gap-3 text-[var(--muted)] text-sm">
-                  <span className="font-mono text-[10px] text-[var(--accent)]">01</span>
-                  Overcome challenges for mining in homes and businesses
-                </li>
-                <li className="flex gap-3 text-[var(--muted)] text-sm">
-                  <span className="font-mono text-[10px] text-[var(--accent)]">02</span>
-                  Spark partnerships that accelerate development
-                </li>
-                <li className="flex gap-3 text-[var(--muted)] text-sm">
-                  <span className="font-mono text-[10px] text-[var(--accent)]">03</span>
-                  Network with hyper-focused builders
-                </li>
-                <li className="flex gap-3 text-[var(--muted)] text-sm">
-                  <span className="font-mono text-[10px] text-[var(--accent)]">04</span>
-                  Build the open-source Bitcoin mining ecosystem
-                </li>
+                {whyTheyCame.map((reason) => (
+                  <li
+                    key={reason.title}
+                    className="border-l-2 border-[var(--card-border)] pl-4 text-sm text-[var(--muted)]"
+                  >
+                    <strong className="text-[var(--foreground)]">{reason.title}</strong> {reason.text}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
-          {/* Who attends */}
+          {/* Who was there */}
           <div>
-            <h3 className="font-mono text-xs tracking-wider text-[var(--terminal-color)] mb-4">
-              &gt; WHO ATTENDS
+            <h3 className="mb-4 font-mono text-xs tracking-wider text-[var(--heatpunk-yellow-color)]">
+              &gt; WHO WAS THERE
             </h3>
             <div className="flex flex-wrap gap-2">
-              {attendees.map((item) => (
-                <span
-                  key={item.tag}
-                  className="heatpunk-tag"
-                  title={item.desc}
-                >
-                  {item.tag}
+              {attendees.map((tag) => (
+                <span key={tag} className="heatpunk-tag">
+                  {tag}
                 </span>
               ))}
             </div>
