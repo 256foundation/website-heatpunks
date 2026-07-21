@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Summit2027Hero } from '@/components/summit/Summit2027Hero';
 import { WhyAttendSection } from '@/components/summit/WhyAttendSection';
+import { BarriersSection } from '@/components/summit/BarriersSection';
 import { WhatToExpectSection } from '@/components/summit/WhatToExpectSection';
 import { Details2027Section } from '@/components/summit/Details2027Section';
 import { RegistrationSection } from '@/components/summit/RegistrationSection';
@@ -13,11 +14,11 @@ import { SummitCommunitySection } from '@/components/summit/SummitCommunitySecti
 export const metadata: Metadata = {
   title: 'Summit 2027',
   description:
-    'Heatpunk Summit 2027 — February 26–27 in Denver, CO. The third annual gathering of bitcoin mining and heating builders. Join the waitlist.',
+    'Heatpunk Summit 2027 — Feb 26–27 in Denver, CO. The open-source mining stack is here; the barriers are gone. Third annual gathering of bitcoin mining and heating builders. $350, fiat or bitcoin. Join the waitlist.',
   openGraph: {
     title: 'Heatpunk Summit 2027 | Hashrate Heatpunks',
     description:
-      'Third annual gathering of bitcoin mining and heating builders — Feb 26–27, 2027 in Denver, CO.',
+      'ACCELERATE — the open-source mining stack is here and the barriers are gone. Third annual gathering, Feb 26–27, 2027 in Denver, CO.',
     images: ['/api/og?title=HEATPUNK%20SUMMIT&subtitle=FEB%2026-27%2C%202027%20%E2%80%A2%20DENVER%2C%20CO&page=summit'],
   },
 };
@@ -66,25 +67,28 @@ export default function SummitPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
       />
 
-      {/* [001] Hero — dates, location, waitlist CTA, stats bar */}
+      {/* Hero — event-poster card, dates/price, waitlist CTA, stats bar */}
       <Summit2027Hero />
 
-      {/* [002] Why attend — three-summit arc */}
+      {/* [001] Why attend — three-summit arc, ending on ACCELERATE */}
       <WhyAttendSection />
 
-      {/* [003] What to expect — talks, workshops, demos, networking */}
+      {/* [002] The barriers are gone — open-source stack + public data (centerpiece) */}
+      <BarriersSection />
+
+      {/* [003] What to expect — 2027 programming + call for demos/workshops/talks */}
       <WhatToExpectSection />
 
-      {/* [004] Event details — dates, venue, map */}
+      {/* [004] Event details — dates, venue, map, travel */}
       <Details2027Section />
 
-      {/* [007] Registration — join the waitlist */}
+      {/* [005] Registration — join the waitlist */}
       <RegistrationSection />
 
-      {/* [005] Sponsorship pitch + past sponsors */}
+      {/* [006] Sponsorship pitch + past supporters */}
       <SponsorshipSection />
 
-      {/* [006] Past summits archive links */}
+      {/* [007] Past summits archive links */}
       <PastSummitsSection />
 
       {/* [008] FAQ */}
@@ -93,8 +97,8 @@ export default function SummitPage() {
       {/* Manifesto */}
       <ManifestoSection />
 
-      {/* Community links */}
-      <SummitCommunitySection />
+      {/* [009] Community links */}
+      <SummitCommunitySection sectionTag="[009]" />
     </div>
   );
 }
