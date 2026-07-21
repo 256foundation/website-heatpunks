@@ -15,9 +15,9 @@ const summitArc = [
   },
   {
     year: '2027',
-    label: 'THE PROOF',
-    headline: 'Results. Documentation. More Builders.',
-    body: 'The FOSS firmware is in the wild, hacked onto closed-source miners by heatpunks everywhere. Case studies have been written. The hardware building blocks exist. HPS 2027 is the year we show what has been built, document what works, and push the industry forward with evidence. Come ready to share what you\'ve done and learn from everyone else who\'s been building.',
+    label: 'ACCELERATE',
+    headline: 'No More Barriers. What Will You Build?',
+    body: 'The open-source mining stack is in the wild — firmware, hashboard and control-board reference designs, and pool implementations, all open. The one thing that always held builders back is gone. Year three is about acceleration: polish, possibility, and what comes next. Come ready to show what you\'ve built, dig into the public data, and figure out what to tackle now that the barriers are down.',
     color: 'var(--flame)',
   },
 ];
@@ -27,7 +27,7 @@ export function WhyAttendSection() {
     <section className="py-16 md:py-24 bg-[var(--card-background)] border-t border-[var(--card-border)]">
       <div className="section-container">
         <div className="mb-12">
-          <span className="section-tag">[002]</span>
+          <span className="section-tag">[001]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2">
             WHY <span className="text-[var(--accent)]">ATTEND</span>
           </h2>

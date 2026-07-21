@@ -26,7 +26,7 @@ export function PastSummitsSection() {
     <section className="py-16 md:py-24 bg-[var(--background)] border-t border-[var(--card-border)]">
       <div className="section-container">
         <div className="mb-12">
-          <span className="section-tag">[006]</span>
+          <span className="section-tag">[007]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2">
             SUMMIT <span className="text-[var(--accent)]">ARCHIVES</span>
           </h2>

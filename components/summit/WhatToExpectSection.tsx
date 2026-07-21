@@ -1,29 +1,31 @@
+import { siteConfig } from '@/data/site';
+
 const activities = [
   {
     tag: 'TALKS',
-    title: 'Deep Dives & State of the Stack',
-    body: 'Presentations covering firmware, hardware, system design, case studies, policy, and where the FOSS mining stack is headed. Expect real data and real builds — not pitch decks.',
+    title: 'State of the Stack',
+    body: 'Where the open-source mining stack stands, real build data, case studies, and the policy and regulatory picture. Real numbers and real builds — not pitch decks.',
     icon: '▶',
     color: 'var(--accent)',
   },
   {
     tag: 'WORKSHOPS',
-    title: 'Hands-On Collaboration',
-    body: 'Structured working sessions where builders and domain experts tackle specific problems together. Past workshops have covered hydronic integration, Home Assistant automations, firmware feedback, and building standards.',
+    title: 'Build on the 256 Stack',
+    body: 'The 2027 focus: hands-on sessions on actually using the 256 Foundation open-source stack — firmware, reference designs, pool setup — plus collaborative work on the problems that are still hard.',
     icon: '⚙',
     color: 'var(--terminal-color)',
   },
   {
     tag: 'DEMOS',
     title: 'Live Hardware on the Floor',
-    body: 'Real mining systems repurposed for heating, space heating rigs, custom control boards, firmware running on live hardware. If you built it, bring it. The demo floor is where ideas become credible.',
+    body: 'Real mining systems repurposed for heat, custom control boards, firmware running on live hardware. If you built it, bring it. The demo floor is where ideas become credible.',
     icon: '⚡',
     color: 'var(--flame)',
   },
   {
     tag: 'NETWORKING',
-    title: 'Cross-Industry Connections',
-    body: 'The rarest thing about this event: mining developers, pleb builders, HVAC engineers, building professionals, firmware hackers, and policy people in the same room. The hallway conversations matter as much as the formal program.',
+    title: 'The Room Itself',
+    body: 'Mining developers, HVAC and building pros, firmware hackers, and policy people in one place. Meals and the after-party are included — and the optional Feb 25 ski day is where a lot of it happens.',
     icon: '◈',
     color: 'var(--muted)',
   },
@@ -31,7 +33,7 @@ const activities = [
 
 export function WhatToExpectSection() {
   return (
-    <section className="py-16 md:py-24 bg-[var(--background)] border-t border-[var(--card-border)]">
+    <section className="py-16 md:py-24 bg-[var(--card-background)] border-t border-[var(--card-border)]">
       <div className="section-container">
         <div className="mb-12">
           <span className="section-tag">[003]</span>
@@ -39,7 +41,8 @@ export function WhatToExpectSection() {
             WHAT TO <span className="text-[var(--accent)]">EXPECT</span>
           </h2>
           <p className="text-[var(--muted)] text-sm mt-3 max-w-xl">
-            Two days of focused programming at The Space in Denver. Same format that&apos;s worked the last two years.
+            Two days of focused programming at The Space in Denver — tuned this year for building on
+            the open-source stack.
           </p>
         </div>
 
@@ -65,8 +68,28 @@ export function WhatToExpectSection() {
           ))}
         </div>
 
-        <div className="mt-8 p-4 bg-[var(--card-background)] border border-[var(--card-border)] font-mono text-xs text-[var(--muted)]">
-          <span className="text-[var(--terminal-color)]">NOTE_</span> A ski day on Feb 25th is being planned. Details TBD — keep an eye on the forum.
+        {/* Agenda note */}
+        <div className="mt-8 p-4 bg-[var(--background)] border border-[var(--card-border)] font-mono text-xs text-[var(--muted)]">
+          <span className="text-[var(--terminal-color)]">NOTE_</span> Full agenda and speaker lineup
+          announced closer to the event. Join the waitlist to stay informed.
+        </div>
+
+        {/* Call for content */}
+        <div className="mt-4 p-5 border border-[var(--accent)]/40 bg-[var(--background)]">
+          <h3 className="font-mono text-sm font-bold tracking-wide text-[var(--foreground)]">
+            WANT TO DEMO, LEAD A WORKSHOP, OR GIVE A TALK?
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+            We&apos;re actively programming HPS 2027 and we prioritize live hardware and working
+            builds over slides. If you&apos;ve built something or can lead a hands-on session, get in
+            touch.
+          </p>
+          <a
+            href={`mailto:${siteConfig.contact.email}?subject=HPS 2027 Demo / Talk / Workshop Proposal`}
+            className="mt-4 inline-block btn-outline"
+          >
+            PITCH A SESSION ↗
+          </a>
         </div>
       </div>
     </section>

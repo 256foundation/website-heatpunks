@@ -4,7 +4,7 @@ import type { FAQItem } from '@/types/schedule';
 const faqItems2027: FAQItem[] = [
   {
     question: 'How much does a ticket cost?',
-    answer: 'Tickets are $350 USD. You can pay in fiat or bitcoin. The purchase link is sent after we review your waitlist application — we curate attendance to keep the signal high.',
+    answer: 'Tickets are $350 USD, payable in fiat or bitcoin. The purchase link is sent after we review your waitlist application — we curate attendance to keep the signal high.',
   },
   {
     question: 'What is the waitlist? Why not just sell tickets?',
@@ -12,23 +12,31 @@ const faqItems2027: FAQItem[] = [
   },
   {
     question: 'When and where is HPS 2027?',
-    answer: 'February 26–27, 2027 at The Space in RiNo, Denver, Colorado. A ski day on February 25th is also being planned — details TBD.',
+    answer: 'February 26–27, 2027 at The Space in RiNo, Denver, Colorado. An optional pre-summit ski day on February 25th is also planned — details to follow, so check back.',
+  },
+  {
+    question: 'What\'s included in the ticket?',
+    answer: 'Your $350 ticket covers meals during the summit, the after-party, and full access to all talks, workshops, and the demo floor. The optional ski day and your travel and lodging are not included.',
+  },
+  {
+    question: 'Where should I stay, and how do I get there?',
+    answer: 'From Denver International Airport (DEN), take the RTD A Line train to the 38th & Blake station — the venue is about a 7-minute walk from there. We recommend the Catbird Hotel (roughly a 4-minute walk from the venue and 3 minutes from the train stop). Otherwise, anywhere in RiNo or downtown Denver puts you close.',
   },
   {
     question: 'What kind of people attend?',
-    answer: 'Mining developers, firmware hackers, pleb builders, HVAC engineers, building professionals, architects, electricians, and serious hobbyists. The mix of mining expertise and building/heating expertise in the same room is what makes this event unique.',
+    answer: 'Mining developers, firmware hackers, pleb builders, HVAC engineers, building professionals, architects, electricians, policy folks, and serious hobbyists. The mix of mining expertise and building/heating expertise in the same room is what makes this event unique.',
   },
   {
     question: 'What should I bring?',
     answer: 'A laptop if you plan to participate in workshops. If you\'ve built something relevant — bring it. The demo floor is where ideas get real. Dress is casual.',
   },
   {
-    question: 'Can I demo a product or project?',
-    answer: 'Yes — reach out to admin@heatpunks.org with a description of what you\'d like to show. We prioritize live hardware and working builds over slides.',
+    question: 'Can I demo, lead a workshop, or give a talk?',
+    answer: 'Yes — email admin@heatpunks.org describing what you\'d like to show or lead. We prioritize live hardware and working builds over slides.',
   },
   {
-    question: 'How do I get there?',
-    answer: 'Denver International Airport (DEN) is about 40 minutes from the venue. The A Line train runs from DIA to downtown Denver. The Space is in the RiNo Art District, accessible via rideshare from downtown or a short walk from the 38th & Blake light rail station.',
+    question: 'Are sessions recorded?',
+    answer: 'Yes. Sessions from previous summits were recorded and posted to YouTube, and they\'re linked from our Education page. We plan to record HPS 2027 as well.',
   },
   {
     question: 'Is there sponsorship available?',

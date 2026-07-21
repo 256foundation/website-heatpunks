@@ -14,13 +14,14 @@ export function RegistrationSection() {
 
       <div className="section-container">
         <div className="mb-8">
-          <span className="section-tag">[007]</span>
+          <span className="section-tag">[005]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2">
             SECURE YOUR <span className="text-[var(--accent)]">SPOT</span>
           </h2>
           <p className="text-[var(--muted)] text-sm mt-3 max-w-xl">
-            HPS 2027 is invite-curated. Tell us who you are and why you want to attend.
-            If you&apos;re a good fit, we&apos;ll send you the link to purchase your ticket ($350).
+            HPS 2027 is a curated working event — kept small and hands-on. Join the waitlist and
+            tell us who you are and what you&apos;re building. If you&apos;re a good fit, we&apos;ll
+            send you the link to buy your ticket ($350, fiat or bitcoin).
           </p>
         </div>
 
@@ -34,7 +35,7 @@ export function RegistrationSection() {
           </button>
 
           <a
-            href={`mailto:${siteConfig.contact.email}?subject=Summit 2027 Sponsorship`}
+            href={`mailto:${siteConfig.contact.email}?subject=HPS 2027 Sponsorship`}
             className="btn-outline"
           >
             SPONSOR / DEMO INQUIRY
