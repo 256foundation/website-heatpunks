@@ -54,16 +54,16 @@ export function HeroSection() {
             href={siteConfig.foundation.donate}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-primary group"
+            className="btn-outline"
           >
             SUPPORT THE MISSION ↗
           </a>
+
           <a
             href={siteConfig.links.forum}
             className="btn-outline"
           >
-            <span className="relative z-10">DIVE INTO FORUM</span>
-            <span className="btn-heat" />
+            DIVE INTO FORUM
           </a>
 
           <a
@@ -75,11 +75,11 @@ export function HeroSection() {
             JOIN TELEGRAM
           </a>
 
-          <Link href="/summit" className="btn-secondary">
+          <Link href="/summit" className="btn-outline">
             ATTEND SUMMIT
           </Link>
 
-          <Link href="/education" className="btn-secondary">
+          <Link href="/education" className="btn-outline">
             LEARN
           </Link>
         </div>

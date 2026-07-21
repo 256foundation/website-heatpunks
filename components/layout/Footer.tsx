@@ -14,31 +14,8 @@ export function Footer() {
         </p>
       </div>
 
-      {/* Flame bar */}
-      <div className="flame-bar mb-8" />
-
-      {/* Donation bar */}
-      <div className="section-container mb-16">
-        <div className="border-l-4 border-l-[var(--accent)] bg-[var(--card-background)] border border-[var(--card-border)] px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <p className="font-mono text-xs tracking-wider text-[var(--foreground)] mb-1">SUPPORT THE MISSION</p>
-            <p className="text-sm text-[var(--muted)] leading-relaxed">
-              Hashrate Heatpunks is a community project under the 256 Foundation, a 501(c)(3) nonprofit. Donations fund safety standards, open-source tools, and free education. Accepts USD &amp; Bitcoin.
-            </p>
-          </div>
-          <a
-            href={siteConfig.foundation.donate}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline shrink-0 text-center"
-          >
-            DONATE ↗
-          </a>
-        </div>
-      </div>
-
       {/* Main footer content */}
-      <div className="section-container pt-20 pb-12 border-t border-[var(--card-border)]">
+      <div className="section-container pt-12 pb-12 border-t border-[var(--card-border)]">
         <div className="grid grid-cols-1 mt-4 md:grid-cols-3 gap-8">
           {/* About / Attribution */}
           <div>

@@ -21,13 +21,13 @@ export function Header() {
               className="h-8 w-auto"
               priority
             />
-            <span className="hidden sm:block font-mono text-sm font-bold tracking-wide text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
+            <span className="hidden sm:block whitespace-nowrap font-mono text-sm font-bold tracking-wide text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
               HASHRATE HEATPUNKS
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
               <NavItemComponent key={item.href} item={item} />
             ))}
