@@ -28,9 +28,9 @@ export function DonateSection() {
     <section className="py-16 md:py-24 bg-[var(--background-alt)] border-t border-[var(--card-border)]">
       <div className="section-container">
         <div className="mb-8">
-          <span className="section-tag">[SUPPORT]</span>
+          <span className="section-tag">[005]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide mt-2 mb-4">
-            FUEL THIS <span className="text-[var(--accent)]">INDUSTRY</span>
+            SUPPORT THE <span className="text-[var(--accent)]">MISSION</span>
           </h2>
           <p className="text-[var(--muted)] max-w-2xl leading-relaxed mb-6">
             We&apos;re a community project of the 256 Foundation — a 501(c)(3) nonprofit building the infrastructure this industry needs.

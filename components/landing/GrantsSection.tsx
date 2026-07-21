@@ -13,9 +13,9 @@ export function GrantsSection() {
       <div className="section-container">
         {/* Section header */}
         <div className="mb-8">
-          <span className="section-tag">[003]</span>
+          <span className="section-tag">[004]</span>
           <h2 className="font-mono text-2xl md:text-3xl font-bold tracking-wide">
-            FUND THE <span className="text-[var(--accent)]">FUTURE</span>
+            GRANT <span className="text-[var(--accent)]">PROGRAM</span>
           </h2>
           <p className="text-[var(--muted)] mt-2 text-sm max-w-2xl">
             Grants are run by our parent nonprofit, the{' '}
