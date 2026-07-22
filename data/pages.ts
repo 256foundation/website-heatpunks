@@ -48,10 +48,10 @@ export const pages: Record<string, PageEntry> = {
   home: {
     key: 'home',
     route: '/',
-    title: 'Hashrate Heatpunks — Bitcoin Mining Heat for Homes & Businesses',
+    title: 'Hashrate Heatpunks — Bitcoin Mining Heat for Homes',
     isHome: true,
     description:
-      'Hashrate Heatpunks is a community turning Bitcoin mining heat into practical home and business heating. Explore guides, the forum, and the Heatpunk Summit.',
+      'A community turning Bitcoin mining heat into practical home and business heating — guides, forum, and the Heatpunk Summit.',
     priority: 1,
     changeFrequency: 'weekly',
     llmsSummary:
@@ -70,7 +70,7 @@ export const pages: Record<string, PageEntry> = {
     route: '/mission',
     title: 'Mission',
     description:
-      'Our mission: make hashrate heating accessible to everyone — building the standards, safety certifications, and tools for a new decentralized mining-heat industry.',
+      'Make hashrate heating accessible to everyone — building the standards, certifications, and tools this new industry needs.',
     priority: 0.9,
     changeFrequency: 'monthly',
     llmsSummary:
@@ -89,7 +89,7 @@ export const pages: Record<string, PageEntry> = {
     route: '/education',
     title: 'Resources',
     description:
-      'DIY guides, books, and Heatpunk Summit talks on turning Bitcoin mining into home heat. Learn hashrate heating from first principles.',
+      'DIY guides, books, and Heatpunk Summit talks on turning Bitcoin mining into home heat — hashrate heating from first principles.',
     priority: 0.8,
     changeFrequency: 'monthly',
     llmsSummary:
@@ -109,7 +109,7 @@ export const pages: Record<string, PageEntry> = {
     route: '/summit',
     title: 'Heatpunk Summit 2027',
     description:
-      'Heatpunk Summit 2027 — Feb 26–27 in Denver, CO. The third annual gathering of Bitcoin mining and heating builders. $350, fiat or bitcoin. Join the waitlist.',
+      'Heatpunk Summit 2027 — Feb 26–27, Denver, CO. Third annual gathering of mining and heating builders. $350, fiat or bitcoin. Waitlist open.',
     priority: 0.9,
     changeFrequency: 'weekly',
     llmsSummary:
@@ -148,7 +148,7 @@ export const pages: Record<string, PageEntry> = {
     route: '/summit/2025',
     title: 'Undermine: Summit 2025 Archive',
     description:
-      'Undermine — Heatpunk Summit 2025 archive. The first gathering that brought ~150 mining developers and heating experts together, Feb 21–22 in Denver, CO.',
+      'Undermine — Heatpunk Summit 2025 archive. The first gathering, ~150 mining and heating builders together, Feb 21–22 in Denver, CO.',
     priority: 0.5,
     changeFrequency: 'yearly',
     llmsSummary:
@@ -168,7 +168,7 @@ export const pages: Record<string, PageEntry> = {
     route: '/summit/2026',
     title: 'Summit 2026 Archive',
     description:
-      'Heatpunk Summit 2026 archive — the second gathering, Feb 27–28 in Denver. Full schedule, recordings, sponsors, and the first Heatpunk Innovation Award.',
+      'Heatpunk Summit 2026 archive — the second gathering, Feb 27–28, Denver. Full schedule, recordings, sponsors, and the Innovation Award.',
     priority: 0.5,
     changeFrequency: 'yearly',
     llmsSummary:
