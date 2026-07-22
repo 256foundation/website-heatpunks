@@ -29,7 +29,7 @@ export function ContactForm() {
     setErrorMessage('');
 
     const formData = new FormData(e.currentTarget);
-    formData.append('h-captcha-response', captchaToken);
+    formData.set('h-captcha-response', captchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
