@@ -12,7 +12,7 @@ The site is the hub for the community: a landing page with a live forum feed, ed
 
 - **[Next.js 14](https://nextjs.org)** (App Router) with React 18 and TypeScript
 - **[Tailwind CSS](https://tailwindcss.com)** for styling
-- **[Nodemailer](https://nodemailer.com)** for transactional email (contact, grant, and summit forms) over SMTP
+- **[Web3Forms](https://web3forms.com)** for form submissions (contact form, summit waitlist) — forms POST directly from the browser, no server-side email backend — with an embedded **hCaptcha** widget for spam protection
 - **[Discourse](https://www.discourse.org)** as the external community forum, surfaced via a read-only API proxy
 - **Jest** + **React Testing Library** for tests
 - **Docker** (standalone output) for self-hosting
@@ -23,29 +23,29 @@ Design goals: static-first with selective server-side rendering, minimal externa
 
 ## Architecture
 
-The site is a single Next.js application that renders mostly static pages, with a thin server layer for the few features that need it (sending email, proxying the forum feed, generating calendar files and Open Graph images).
+The site is a single Next.js application that renders mostly static pages, with a thin server layer for the few features that need it (proxying the forum feed, generating calendar files and Open Graph images). Form submissions are not server-side at all — both forms POST directly from the browser to Web3Forms.
 
 ```
 Browser
-  │  HTTPS
-  ▼
-Next.js server (Docker container)
+  │  HTTPS                              │ HTTPS (direct)
+  ▼                                      ▼
+Next.js server (Docker container)      Web3Forms (+ hCaptcha)
   ├─ App Router (/app)        server-rendered pages + client components
-  ├─ API routes (/app/api)    contact / grants / summit-invitation / og
-  ├─ Lib layer (/lib)         email (SMTP), discourse (fetch+cache), calendar (ICS), schedule
-  └─ Data layer (/data)       content as TS/YAML: site config, videos, schedule, sponsors, grants
-        │ SMTP            │ HTTPS
-        ▼                 ▼
-   SMTP provider     Discourse forum + YouTube embeds
+  ├─ API routes (/app/api)    og
+  ├─ Lib layer (/lib)         discourse (fetch+cache), calendar (ICS), schedule
+  └─ Data layer (/data)       content as TS/YAML: site config, videos, schedule, sponsors
+        │ HTTPS
+        ▼
+   Discourse forum + YouTube embeds
 ```
 
 **Request flow at a glance:**
 
-- **Pages** (`/`, `/mission`, `/education`, `/grants`, `/summit` (the 2027 summit), `/summit/2025` and `/summit/2026` (rich archives), `/summit/schedule`) are React Server Components. Interactive pieces (video carousel, forms, expandable schedule cards, mobile nav, modals) are client components. A generic `/summit/[year]` fallback route also exists for future archives.
+- **Pages** (`/`, `/mission`, `/education`, `/summit` (the 2027 summit), `/summit/2025` and `/summit/2026` (rich archives), `/summit/schedule`) are React Server Components. Interactive pieces (video carousel, forms, expandable schedule cards, mobile nav, modals) are client components. A generic `/summit/[year]` fallback route also exists for future archives. `/grants` isn't a page — it 308-redirects to `256foundation.org/grants`.
 - **API routes** handle the dynamic work:
-  - `POST /api/contact`, `POST /api/grants`, `POST /api/summit-invitation` — validate input and send email via `lib/email.ts`.
   - `GET /api/og` — generates Open Graph social images on the fly.
-- **Content is data, not hardcoded markup.** Most page content lives in `/data` (e.g. `site.ts`, `videos.ts`, `schedule.yaml`, `sponsors.yaml`, `grants.ts`) so it can be edited without touching components.
+- **Forms** (`ContactForm`, `WaitlistModal`) `fetch()` straight to `https://api.web3forms.com/submit` with a `FormData` payload (including an embedded hCaptcha token) — no proxy route, no email library in this repo. Web3Forms delivers the notification email per its own dashboard configuration.
+- **Content is data, not hardcoded markup.** Most page content lives in `/data` (e.g. `site.ts`, `videos.ts`, `schedule.yaml`, `sponsors.yaml`) so it can be edited without touching components.
 
 For the full design — component breakdown, data models, caching strategy, and rationale — see **[ARCHITECTURE.md](ARCHITECTURE.md)** and **[SPEC.md](SPEC.md)**.
 
@@ -53,9 +53,9 @@ For the full design — component breakdown, data models, caching strategy, and 
 
 ```
 app/            App Router pages and API routes
-  api/          contact, grants, summit-invitation, og
-components/     React components, grouped by section (landing, education, grants, summit, schedule, layout, shared)
-lib/            Server-side helpers: email, discourse, calendar, schedule, utils
+  api/          og
+components/     React components, grouped by section (landing, education, summit, schedule, layout, shared)
+lib/            Server-side helpers: discourse, calendar, schedule, utils
 data/           Site content and config (TS + YAML)
 types/          Shared TypeScript types
 content/        Long-form educational content
@@ -83,7 +83,7 @@ npm install
 # 2. Create your local env file
 cp .env.example .env.local
 #    Then fill in values (see "Environment variables" below).
-#    The site runs without them, but email/forum features stay inert.
+#    The site runs without them, but the forms and forum feed stay inert.
 
 # 3. Start the dev server
 npm run dev
@@ -111,11 +111,8 @@ Copy `.env.example` to `.env.local` (development) or provide these to the contai
 
 | Variable | Required for | Notes |
 |----------|--------------|-------|
-| `SMTP_HOST` | Email forms | SMTP server hostname (e.g. `smtp-relay.brevo.com`) |
-| `SMTP_PORT` | Email forms | Typically `587` |
-| `SMTP_SECURE` | Email forms | `false` for STARTTLS on port 587, `true` for 465 |
-| `SMTP_USER` | Email forms | SMTP account login |
-| `SMTP_PASS` | Email forms | SMTP key/password |
+| `NEXT_PUBLIC_WEB3FORMS_CONTACT_ACCESS_KEY` | Contact form | Access key for the contact form's entry in [web3forms.com](https://web3forms.com) — each form is a separate entry with its own key |
+| `NEXT_PUBLIC_WEB3FORMS_WAITLIST_ACCESS_KEY` | Summit waitlist | Access key for the waitlist's separate Web3Forms entry |
 | `DISCOURSE_URL` | Forum feed | Base URL of the Discourse instance |
 | `DISCOURSE_API_KEY` | Forum feed | Only if the forum requires authentication |
 | `DISCOURSE_API_USERNAME` | Forum feed | Only if the forum requires authentication |
@@ -123,9 +120,9 @@ Copy `.env.example` to `.env.local` (development) or provide these to the contai
 | `NEXT_PUBLIC_UMAMI_WEBSITE_ID` | Analytics | Optional [Umami](https://umami.is) analytics |
 | `NEXT_PUBLIC_UMAMI_URL` | Analytics | Optional Umami script URL |
 
-> `NEXT_PUBLIC_*` variables are read at **build time** and baked into the client bundle — set them before building, not just at runtime.
+> `NEXT_PUBLIC_*` variables are read at **build time** and baked into the client bundle — set them before building, not just at runtime. This includes both Web3Forms keys.
 
-Without SMTP configured, the contact/grant/summit forms will fail to send. Without `DISCOURSE_URL`, the live forum feed on the landing page is simply omitted.
+Without the two `NEXT_PUBLIC_WEB3FORMS_*_ACCESS_KEY` vars configured, the contact form and summit waitlist (respectively) will fail to submit. Without `DISCOURSE_URL`, the live forum feed on the landing page is simply omitted.
 
 ---
 
@@ -135,7 +132,7 @@ The app builds to a self-contained [Next.js standalone](https://nextjs.org/docs/
 
 ### Option A — Docker Compose (recommended)
 
-1. Create a `.env` file in the project root with your production values (at minimum `NEXT_PUBLIC_SITE_URL`, and the `SMTP_*` / `DISCOURSE_*` vars if you want email and the forum feed):
+1. Create a `.env` file in the project root with your production values (at minimum `NEXT_PUBLIC_SITE_URL`, plus the two `NEXT_PUBLIC_WEB3FORMS_*_ACCESS_KEY` vars if you want the forms to submit and `DISCOURSE_*` if you want the forum feed):
 
    ```bash
    cp .env.example .env
@@ -162,10 +159,11 @@ The app builds to a self-contained [Next.js standalone](https://nextjs.org/docs/
 ```bash
 docker build \
   --build-arg NEXT_PUBLIC_SITE_URL=https://your-domain.tld \
+  --build-arg NEXT_PUBLIC_WEB3FORMS_CONTACT_ACCESS_KEY=... \
+  --build-arg NEXT_PUBLIC_WEB3FORMS_WAITLIST_ACCESS_KEY=... \
   -t heatpunk-website .
 
 docker run -d -p 3000:3000 \
-  -e SMTP_HOST=... -e SMTP_PORT=587 -e SMTP_USER=... -e SMTP_PASS=... \
   -e DISCOURSE_URL=https://your-forum.tld \
   --name heatpunk-website \
   heatpunk-website
@@ -189,7 +187,7 @@ The container serves plain HTTP on port 3000. For production, put it behind a re
 
 The site integrates with a few external services. None are required to run it locally, but they power production features:
 
-- **SMTP provider** — sends form submissions (contact, grant applications, summit invitations).
+- **[Web3Forms](https://web3forms.com)** — receives and routes form submissions (contact form, summit waitlist) directly from the browser; notification email is configured in its dashboard.
 - **Discourse forum** ([forum.heatpunks.org](https://forum.heatpunks.org)) — the live community feed on the landing page is fetched and cached from its public API.
 - **YouTube** — summit talks and recap videos are embedded.
 - **Umami** *(optional)* — privacy-friendly, self-hostable analytics.

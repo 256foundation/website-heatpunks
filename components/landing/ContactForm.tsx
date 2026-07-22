@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useRef, useState, FormEvent } from 'react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+
+const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
 
 export function ContactForm() {
   const [name, setName] = useState('');
@@ -10,35 +13,48 @@ export function ContactForm() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [captchaToken, setCaptchaToken] = useState('');
+  const captchaRef = useRef<HCaptcha>(null);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      setStatus('error');
+      setErrorMessage('Please complete the captcha.');
+      return;
+    }
+
     setStatus('submitting');
     setErrorMessage('');
 
+    const formData = new FormData(e.currentTarget);
+    formData.append('h-captcha-response', captchaToken);
+
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, message }),
+        headers: { Accept: 'application/json' },
+        body: formData,
       });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         setStatus('success');
         setName('');
         setEmail('');
         setMessage('');
       } else {
         setStatus('error');
-        setErrorMessage(data.error || 'Failed to send message');
+        setErrorMessage(data.message || 'Failed to send message');
       }
     } catch {
       setStatus('error');
       setErrorMessage('Failed to send message. Please try again.');
+    } finally {
+      captchaRef.current?.resetCaptcha();
+      setCaptchaToken('');
     }
   };
 
@@ -65,6 +81,10 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_CONTACT_ACCESS_KEY} />
+      <input type="hidden" name="subject" value="Heatpunks Contact" />
+      <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} />
+
       <div>
         <label htmlFor="name" className={labelClasses}>
           NAME <span className="text-[var(--accent)]">*</span>
@@ -112,6 +132,14 @@ export function ContactForm() {
           placeholder="Your message..."
         />
       </div>
+
+      <HCaptcha
+        ref={captchaRef}
+        sitekey={HCAPTCHA_SITEKEY}
+        reCaptchaCompat={false}
+        onVerify={(token) => setCaptchaToken(token)}
+        onExpire={() => setCaptchaToken('')}
+      />
 
       {status === 'error' && (
         <div className="p-3 border border-[var(--red)] bg-[var(--red)]/10 font-mono text-xs text-[var(--red)]">

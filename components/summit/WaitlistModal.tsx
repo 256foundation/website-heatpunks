@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface WaitlistModalProps {
 }
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
+
+const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
 
 const industryOptions = [
   { value: '', label: 'Select your industry focus' },
@@ -21,7 +24,9 @@ const industryOptions = [
 export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
   const [formState, setFormState] = useState<FormState>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState('');
   const modalRef = useRef<HTMLDivElement>(null);
+  const captchaRef = useRef<HCaptcha>(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -49,29 +54,42 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
     if (e.target === e.currentTarget) onClose();
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!captchaToken) {
+      setError('Please complete the captcha.');
+      setFormState('error');
+      return;
+    }
+
     setFormState('submitting');
     setError(null);
 
+    const formData = new FormData(e.currentTarget);
+    formData.append('h-captcha-response', captchaToken);
+
     try {
-      const response = await fetch('/api/summit-invitation', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: { Accept: 'application/json' },
+        body: formData,
       });
 
       const data = await response.json();
 
-      if (response.ok) {
+      if (response.ok && data.success) {
         setFormState('success');
       } else {
-        setError(data.error || 'Something went wrong. Please try again.');
+        setError(data.message || 'Something went wrong. Please try again.');
         setFormState('error');
       }
     } catch {
       setError('Network error. Please check your connection and try again.');
       setFormState('error');
+    } finally {
+      captchaRef.current?.resetCaptcha();
+      setCaptchaToken('');
     }
   };
 
@@ -79,6 +97,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
     setFormData({ name: '', email: '', company: '', industryFocus: '', whyAttend: '', contribution: '' });
     setFormState('idle');
     setError(null);
+    setCaptchaToken('');
     onClose();
   };
 
@@ -142,12 +161,17 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_WAITLIST_ACCESS_KEY} />
+              <input type="hidden" name="subject" value="Heatpunks Summit Application" />
+              <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} />
+
               <div>
                 <label className="block font-mono text-xs tracking-wider text-[var(--muted)] mb-1">
                   NAME <span className="text-[var(--accent)]">*</span>
                 </label>
                 <input
                   type="text"
+                  name="name"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -163,6 +187,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -178,6 +203,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
                 </label>
                 <input
                   type="text"
+                  name="company"
                   required
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -192,6 +218,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
                   INDUSTRY FOCUS <span className="text-[var(--accent)]">*</span>
                 </label>
                 <select
+                  name="industryFocus"
                   required
                   value={formData.industryFocus}
                   onChange={(e) => setFormData({ ...formData, industryFocus: e.target.value })}
@@ -209,6 +236,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
                   WHY DO YOU WANT TO ATTEND? <span className="text-[var(--accent)]">*</span>
                 </label>
                 <textarea
+                  name="whyAttend"
                   required
                   rows={3}
                   value={formData.whyAttend}
@@ -224,6 +252,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
                   HOW CAN YOU CONTRIBUTE TO THE DISCUSSION? <span className="text-[var(--accent)]">*</span>
                 </label>
                 <textarea
+                  name="contribution"
                   required
                   rows={3}
                   value={formData.contribution}
@@ -233,6 +262,14 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
                   disabled={formState === 'submitting'}
                 />
               </div>
+
+              <HCaptcha
+                ref={captchaRef}
+                sitekey={HCAPTCHA_SITEKEY}
+                reCaptchaCompat={false}
+                onVerify={(token) => setCaptchaToken(token)}
+                onExpire={() => setCaptchaToken('')}
+              />
 
               <button
                 type="submit"

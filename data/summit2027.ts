@@ -30,5 +30,5 @@ export const summit2027Info = {
     note: 'Tickets are $350. Pay in fiat or bitcoin when your spot is confirmed.',
   },
   // Prefer siteConfig.contact.email at call sites; this mirrors it for convenience.
-  sponsorEmail: 'admin@heatpunks.org',
+  sponsorEmail: 'tyler@256foundation.org',
 };
