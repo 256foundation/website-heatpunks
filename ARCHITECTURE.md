@@ -8,10 +8,12 @@
 > for the 2027 summit pivot, use [SPEC-summit-2027.md](SPEC-summit-2027.md).
 >
 > **Known divergences from what shipped:**
-> - **Email/SMTP:** the app uses Nodemailer over **Brevo** SMTP (`smtp-relay.brevo.com`), not Proton Mail
->   (see the diagrams and ADR-004 below). All three forms (contact, grants, summit invitation) send to a
->   single inbox, **admin@heatpunks.org** — the per-purpose contact@ / grants@ / summit@ recipients in the
->   "Email Routing" table were never separated.
+> - **No server-side email backend at all.** The Nodemailer/SMTP/Brevo design below (and ADR-004) was
+>   replaced entirely: `lib/email.ts`, `/api/contact`, and `/api/summit-invitation` were deleted. Both
+>   forms (`ContactForm`, `WaitlistModal`) now POST directly from the browser to Web3Forms
+>   (`https://api.web3forms.com/submit`), gated by an embedded hCaptcha widget. Notifications go to
+>   **tyler@256foundation.org**, configured in the Web3Forms dashboard, not in this repo. See CLAUDE.md's
+>   Architecture section for the current shape.
 > - **No `/api/forum` proxy route** (shown in the top diagram). The Discourse feed is fetched directly
 >   server-side in `lib/discourse.ts`.
 > - **Summit is now 2027.** ADR-009/-010 and the metadata tables reference "Summit 2026 / Feb 27–28, 2026";

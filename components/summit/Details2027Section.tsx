@@ -14,7 +14,12 @@ export function Details2027Section() {
             <DetailBlock
               label="DATE"
               value="February 26–27, 2027"
-              sub="Optional pre-summit ski day Feb 25 — details to follow, check back."
+              sub="Programming runs all day Friday the 26th and Saturday the 27th, with evening activities both nights."
+            />
+            <DetailBlock
+              label="TRAVEL"
+              value="Fly in Thu, leave Sun"
+              sub="Want to ski Thursday? Fly in Wednesday instead — optional pre-summit ski day Feb 25, details to follow."
             />
             <DetailBlock
               label="TICKET"

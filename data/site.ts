@@ -19,7 +19,7 @@ export const siteConfig = {
   },
 
   contact: {
-    email: 'admin@heatpunks.org',
+    email: 'tyler@256foundation.org',
   },
 
   foundation: {

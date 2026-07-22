@@ -15,9 +15,10 @@
 >   Feb 27–28, 2026" copy below describes what is now the 2026 archive.
 > - **The grant program is currently paused.** `data/site.ts → grants.open` gates the application form,
 >   the `/api/grants` route, and every "apply" CTA in one flag; while closed the page points to donations.
-> - **Email:** the SMTP provider is **Brevo** (`smtp-relay.brevo.com`), not Proton Mail. All three forms
->   (contact, grants, summit invitation) deliver to a single inbox, **admin@heatpunks.org** — the separate
->   contact@ / grants@ / summit@ inboxes described below were never split out.
+> - **No server-side email backend.** The Brevo/Nodemailer SMTP design below was removed entirely —
+>   `lib/email.ts`, `/api/contact`, and `/api/summit-invitation` no longer exist. `ContactForm` and
+>   `WaitlistModal` now POST directly to Web3Forms from the browser (with an embedded hCaptcha widget),
+>   which routes notifications to **tyler@256foundation.org** per its own dashboard config, not this repo.
 > - **No `/forum` redirect page and no `/api/forum` proxy route** exist. The forum feed is fetched
 >   server-side in `lib/discourse.ts`; the forum is otherwise linked directly to forum.heatpunks.org.
 > - **No `summit.heatpunks.org` DNS redirect** is part of this repo.

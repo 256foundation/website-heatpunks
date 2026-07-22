@@ -1,5 +1,6 @@
 import { FAQAccordion } from './FAQAccordion';
 import type { FAQItem } from '@/types/schedule';
+import { siteConfig } from '@/data/site';
 
 const faqItems2027: FAQItem[] = [
   {
@@ -32,7 +33,7 @@ const faqItems2027: FAQItem[] = [
   },
   {
     question: 'Can I demo, lead a workshop, or give a talk?',
-    answer: 'Yes — email admin@heatpunks.org describing what you\'d like to show or lead. We prioritize live hardware and working builds over slides.',
+    answer: `Yes — email ${siteConfig.contact.email} describing what you'd like to show or lead. We prioritize live hardware and working builds over slides.`,
   },
   {
     question: 'Are sessions recorded?',
@@ -40,7 +41,7 @@ const faqItems2027: FAQItem[] = [
   },
   {
     question: 'Is there sponsorship available?',
-    answer: 'Yes — email admin@heatpunks.org with your interest. We don\'t have fixed tiers; reach out and we\'ll figure out what makes sense.',
+    answer: `Yes — email ${siteConfig.contact.email} with your interest. We don't have fixed tiers; reach out and we'll figure out what makes sense.`,
   },
 ];
 
