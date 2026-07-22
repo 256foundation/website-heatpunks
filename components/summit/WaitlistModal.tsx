@@ -162,7 +162,7 @@ export function WaitlistModal({ isOpen, onClose, year }: WaitlistModalProps) {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_WAITLIST_ACCESS_KEY} />
-              <input type="hidden" name="subject" value="Heatpunks Summit Application" />
+              <input type="hidden" name="subject" value="Heatpunk Summit Waitlist Application" />
               <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} />
 
               <div>
