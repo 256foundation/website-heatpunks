@@ -1,5 +1,11 @@
 # HPS 2027 Summit Page Spec
 
+> **Note:** this build has since shipped, and `/summit` itself was later overhauled beyond this spec —
+> see [SPEC-summit-2027-overhaul.md](SPEC-summit-2027-overhaul.md), which wins where the two conflict.
+> One correction: every `admin@heatpunks.org` sponsor/demo contact reference below was never
+> provisioned — the live single contact address is **tyler@256foundation.org**
+> (`siteConfig.contact.email` in `data/site.ts`).
+
 **Purpose:** Update the Hashrate Heatpunks website for the 2027 Heatpunk Summit.  
 **Scope:** New 2027 summit page, rich archive pages for 2025 and 2026, sitewide copy/language updates.
 

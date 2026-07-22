@@ -1,6 +1,6 @@
 # SPEC — Move Grants to the 256 Foundation
 
-**Status:** Approved for implementation (spec authored 2026-07-20). Current at time of writing.
+**Status:** Shipped (spec authored 2026-07-20; implemented since).
 
 ## Summary
 
@@ -44,7 +44,7 @@ Edit these to remove grant-only code:
 - **`data/site.ts`** — remove the entire `grants: { open: false }` key and its explanatory comment. Also remove the `DONATE_URL` (Zaprite) constant (see Part C).
 - **`app/sitemap.ts`** — remove the `/grants` entry (around line 27).
 
-**Consequence check:** after deletion, `siteConfig.grants.open` must have **zero** references. All current references live in files that are either deleted (grants components, api, data/grants) or edited in Part D (education, mission, landing/GrantsSection). Grep to confirm `grants.open` and `@/data/grants` / `@/types/grants` are fully gone. The `grants@heatpunks.org` mailto disappears with `ContactSection` (the site keeps `admin@heatpunks.org` for the contact form).
+**Consequence check:** after deletion, `siteConfig.grants.open` must have **zero** references. All current references live in files that are either deleted (grants components, api, data/grants) or edited in Part D (education, mission, landing/GrantsSection). Grep to confirm `grants.open` and `@/data/grants` / `@/types/grants` are fully gone. The `grants@heatpunks.org` mailto disappears with `ContactSection` (the site keeps `siteConfig.contact.email` — tyler@256foundation.org — for the contact form).
 
 Optional (harmless if skipped): `app/api/og` may contain a `page=grants` branch that becomes dead. Leaving it does no harm; remove only if trivially clean.
 

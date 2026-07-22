@@ -25,6 +25,10 @@
 >   CLAUDE.md / README.md.
 > - **The grant program is currently paused** via `data/site.ts → grants.open` (gates the form, the API
 >   route, and all "apply" CTAs in one flag).
+> - **No `@heatpunks.org` mailboxes were ever provisioned.** Every `admin@`, `contact@`, `grants@`, and
+>   `summit@heatpunks.org` address below (ADR tables, `.env` examples) describes the original design only.
+>   The live single contact address, sitewide, is **tyler@256foundation.org** (`siteConfig.contact.email`
+>   in `data/site.ts`) — see the email-backend divergence above.
 
 ## Overview
 

@@ -1,7 +1,11 @@
 # HPS 2027 Summit Page — Overhaul Spec
 
-**Status: current — approved via spec interview, 2026-07-21.**
+**Status: shipped** (approved via spec interview 2026-07-21; implemented since).
 Supersedes the 2027-page portions of [SPEC-summit-2027.md](SPEC-summit-2027.md) (that doc remains the historical build spec for the 2025/2026 archives and initial 2027 build). Where the two conflict for `/summit`, **this document wins.**
+
+> **Correction:** every `admin@heatpunks.org` reference below (§2.2, `sponsorEmail`, §7, acceptance criteria)
+> describes a mailbox that was never provisioned. `siteConfig.contact.email` (`data/site.ts`) — the value
+> every sponsor/demo mailto actually resolves to — is **tyler@256foundation.org**, not `admin@heatpunks.org`.
 
 **Purpose:** Overhaul the `/summit` (Heatpunk Summit 2027) page. It currently reads as a flat homepage clone with thin, generic sections, scrambled section numbering, and a broken venue map. This spec rebuilds it around the **ACCELERATE** narrative with the visual polish of the freshly-overhauled `/summit/2026` archive.
 
@@ -35,7 +39,7 @@ The arc must **end on 2027/ACCELERATE** and set up the "Barriers Are Gone" cente
 - **Venue:** **The Space**, 3700 N Franklin St, Denver, CO 80205 — RiNo Art District. `coordinates: { lat: 39.7683395586488, lng: -104.96816299173025 }`.
 - **Ticket:** **$350 USD**, payable in **fiat or bitcoin**. Waitlist-gated: purchase link sent only after review. Ticket **includes meals during the summit, the after-party, and full access to all sessions, workshops, and the demo floor**. (Ski day and travel/lodging are not included.)
 - **Travel:** RTD **A Line** train from Denver International Airport → **38th & Blake** station (~7-min walk to the venue). Recommended lodging: **Catbird Hotel** (~4-min walk from venue; ~3-min from the train stop — right in between). General guidance otherwise: stay in RiNo / downtown Denver.
-- **Contact:** All sponsor/demo/proposal mail → **admin@heatpunks.org** (use `siteConfig.contact.email`, which already equals this — single source of truth; stop hardcoding the literal string in some components and the config in others).
+- **Contact:** All sponsor/demo/proposal mail → `siteConfig.contact.email` (**tyler@256foundation.org** — single source of truth; stop hardcoding the literal string in some components and the config in others).
 
 ---
 
@@ -78,7 +82,7 @@ export const summit2027Info = {
     includes: ['Meals during the summit', 'After-party', 'All talks, workshops & demos'],
     note: 'Tickets are $350. Pay in fiat or bitcoin when your spot is confirmed.',
   },
-  sponsorEmail: 'admin@heatpunks.org', // prefer siteConfig.contact.email at call sites
+  sponsorEmail: 'tyler@256foundation.org', // prefer siteConfig.contact.email at call sites
 };
 ```
 
@@ -209,7 +213,7 @@ Refresh existing 8 for confirmed dates/price and the ACCELERATE framing, and **a
 
 ## 7. Sitewide Audit
 
-- **Contact/sponsor mailto:** standardize every summit sponsor/demo/proposal link on `siteConfig.contact.email` (= admin@heatpunks.org). Remove hardcoded literals in `Summit2027Hero` and align `RegistrationSection`/`SponsorshipSection`.
+- **Contact/sponsor mailto:** standardize every summit sponsor/demo/proposal link on `siteConfig.contact.email` (= tyler@256foundation.org). Remove hardcoded literals in `Summit2027Hero` and align `RegistrationSection`/`SponsorshipSection`.
 - **Stale copy:** remove `data/summit2027.ts` "proof is in the pudding" tagline (§4). Grep the 2027 components for "PLANNING"/"TBD" on dates and for "proof is in the pudding".
 - Confirm no other page links to `/summit` with outdated 2026 language (homepage `ATTEND SUMMIT` link is fine).
 
@@ -233,11 +237,11 @@ Refresh existing 8 for confirmed dates/price and the ACCELERATE framing, and **a
 1. `/summit` leads with an event-poster hero (flame bg, `// ACCELERATE`, `HEATPUNK SUMMIT 2027`, `FEB 26–27, 2027 · DENVER, CO`, `$350 · FIAT OR BITCOIN`, `WAITLIST OPEN`, waitlist + sponsor CTAs) that is visibly distinct from the homepage hero.
 2. Sections render in the §3 order with **sequential, unique** `section-tag`s `[001]`–`[009]`; no duplicates; hero and manifesto untagged.
 3. A new **"The Barriers Are Gone"** section exists as the centerpiece: open-stack building blocks (linked to 256 Foundation), "so what will you build?", and the folded-in public data/documentation angle.
-4. Why Attend = the 3-year arc ending on **ACCELERATE**; What to Expect is 2027-focused (256-stack workshops) and ends with a demo/workshop/talk call to admin@heatpunks.org.
+4. Why Attend = the 3-year arc ending on **ACCELERATE**; What to Expect is 2027-focused (256-stack workshops) and ends with a demo/workshop/talk call to tyler@256foundation.org.
 5. Event Details shows confirmed dates/price/includes, the Catbird + A Line travel guidance, and a **map that pins the correct venue** (verified in preview).
 6. Sponsorship is a 2027 call-to-action with a labeled, deduped 2025+2026 "past supporters" strip and no 2027 logos.
 7. FAQ has the 10 items in §5.9, including meals/what's-included, lodging/travel, and recordings.
-8. All sponsor/demo mailto links resolve to admin@heatpunks.org via `siteConfig.contact.email`.
+8. All sponsor/demo mailto links resolve to tyler@256foundation.org via `siteConfig.contact.email`.
 9. `data/summit2027.ts` copy updated; no "proof is in the pudding" or date-level "PLANNING/TBD" strings remain.
 10. `npx tsc --noEmit`, `npm run lint`, and `npm run build` all pass; `/summit`, `/summit/2026`, `/summit/2025`, `/education` all render without console/network errors in the browser preview; light and dark themes both legible.
 

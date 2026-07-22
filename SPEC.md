@@ -19,6 +19,8 @@
 >   `lib/email.ts`, `/api/contact`, and `/api/summit-invitation` no longer exist. `ContactForm` and
 >   `WaitlistModal` now POST directly to Web3Forms from the browser (with an embedded hCaptcha widget),
 >   which routes notifications to **tyler@256foundation.org** per its own dashboard config, not this repo.
+> - **No `@heatpunks.org` mailboxes were ever provisioned.** `admin@`, `contact@`, and `grants@heatpunks.org`
+>   below describe the original design only; the live single contact address is **tyler@256foundation.org**.
 > - **No `/forum` redirect page and no `/api/forum` proxy route** exist. The forum feed is fetched
 >   server-side in `lib/discourse.ts`; the forum is otherwise linked directly to forum.heatpunks.org.
 > - **No `summit.heatpunks.org` DNS redirect** is part of this repo.
