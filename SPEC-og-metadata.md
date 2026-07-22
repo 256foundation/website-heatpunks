@@ -30,7 +30,7 @@ Non-goals / out of scope:
 ### 2.1 Canvas
 - **Dimensions:** 1200 × 630 (unchanged).
 - **Format:** PNG via `next/og` `ImageResponse` (unchanged).
-- **Runtime:** `edge` (unchanged).
+- **Runtime:** `nodejs` (default) — **not** `edge`. **Correction (post-deploy, 2026-07-22):** the initial implementation used `runtime = 'edge'`, which built and worked in local dev, but failed on Vercel: the bundled fonts push the function past Vercel's 1 MB **Edge** Function size limit (`@vercel/og`'s own Satori/Resvg WASM core is already ~2 MB before any custom fonts are added, so Edge was never really viable once custom fonts were involved). Fixed by removing the `runtime = 'edge'` export (Node.js Serverless Functions have a far larger size ceiling) and switching asset loading from `fetch(new URL(..., import.meta.url))` (an Edge-only pattern) to `fs.readFileSync(join(process.cwd(), ...))`, read once at module scope. See `app/api/og/route.tsx`.
 
 ### 2.2 Visual anatomy (top → bottom)
 1. **Background:** near-black (`#0a0a0a` → `#141414` vertical linear-gradient) with a single flame **radial-gradient** glow in the upper-right (approx `radial-gradient(ellipse at 78% 8%, rgba(255,107,0,0.14) 0%, transparent 46%)`). Radial/linear gradients are Satori-supported.
