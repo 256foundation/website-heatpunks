@@ -1,19 +1,11 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/data/site';
 import { BookSection } from '@/components/education/BookSection';
 import { VideoSection } from '@/components/education/VideoSection';
 import { summit2026Videos, summit2025Videos } from '@/data/videos';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Resources',
-  description: 'DIY guides and tutorials for building Bitcoin mining heaters. Learn how to turn hashrate into home heat.',
-  openGraph: {
-    title: 'Resources | Hashrate Heatpunks',
-    description: 'DIY guides and tutorials for building Bitcoin mining heaters. Learn how to turn hashrate into home heat.',
-    images: ['/api/og?title=Resources%20%26%20Guides&subtitle=DIY%20hashrate%20heating%20tutorials&page=education'],
-  },
-};
+export const metadata = pageMetadata('education');
 
 export default function EducationPage() {
   return (

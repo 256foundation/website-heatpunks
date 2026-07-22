@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { SummitHero } from '@/components/summit/SummitHero';
@@ -12,20 +11,9 @@ import { SponsorGrid } from '@/components/summit/SponsorGrid';
 import { SummitCommunitySection } from '@/components/summit/SummitCommunitySection';
 import { getScheduleData, getSponsors } from '@/lib/schedule';
 import { getSessionsByType } from '@/lib/scheduleUtils';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Summit 2026 Archive',
-  description:
-    'Heatpunk Summit 2026 archive — February 27-28 in Denver, CO. The second annual gathering: Hashrate Heatpunks became a formal project of the 256 Foundation, workshops debuted, and the first Heatpunk Innovation Award was given out.',
-  openGraph: {
-    title: 'Summit 2026 Archive | Hashrate Heatpunks',
-    description:
-      'The second gathering. The community came back organized — full schedule, recordings, and sponsors from HPS 2026.',
-    images: [
-      '/api/og?title=HEATPUNK%20SUMMIT%202026&subtitle=The%20second%20gathering%20%E2%80%94%20Denver%2C%20Feb%202026&page=summit',
-    ],
-  },
-};
+export const metadata = pageMetadata('summit-2026');
 
 export default function Summit2026Page() {
   const scheduleData = getScheduleData();

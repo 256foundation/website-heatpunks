@@ -1,16 +1,8 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { siteConfig } from '@/data/site';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Mission',
-  description: 'Our mission: make hashrate heating accessible to everyone. Learn about our vision for sustainable Bitcoin mining heat reuse.',
-  openGraph: {
-    title: 'Mission | Hashrate Heatpunks',
-    description: 'Our mission: make hashrate heating accessible to everyone. Learn about our vision for sustainable Bitcoin mining heat reuse.',
-    images: ['/api/og?title=Our%20Mission&subtitle=Making%20hashrate%20heating%20accessible%20to%20everyone&page=mission'],
-  },
-};
+export const metadata = pageMetadata('mission');
 
 const beliefs = [
   {

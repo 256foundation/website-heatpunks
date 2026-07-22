@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
 import Link from 'next/link';
 import { VideoEmbed } from '@/components/shared/VideoEmbed';
@@ -8,20 +7,9 @@ import { SponsorRow2025 } from '@/components/summit/SponsorRow2025';
 import { SummitCommunitySection } from '@/components/summit/SummitCommunitySection';
 import { summit2025, sponsors2025 } from '@/data/summit2025';
 import { summit2025Videos } from '@/data/videos';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Undermine: Summit 2025 Archive',
-  description:
-    'Undermine — Heatpunk Summit 2025 archive. February 21–22 in Denver, CO. The first gathering that brought mining developers and heating experts together for the very first time.',
-  openGraph: {
-    title: 'Undermine: HPS 2025 Archive | Hashrate Heatpunks',
-    description:
-      'The first gathering. ~150 builders. The spark that started the hashrate heating movement.',
-    images: [
-      '/api/og?title=UNDERMINE&subtitle=Heatpunk%20Summit%202025%20Archive%20%C2%B7%20Denver&page=summit',
-    ],
-  },
-};
+export const metadata = pageMetadata('summit-2025');
 
 export default function Summit2025Page() {
   const recapVideo = summit2025Videos[0];

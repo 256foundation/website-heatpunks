@@ -1,17 +1,9 @@
-import type { Metadata } from 'next';
 import { getScheduleData } from '@/lib/schedule';
 import { ScheduleHeader } from '@/components/schedule/ScheduleHeader';
 import { DayTabs } from '@/components/schedule/DayTabs';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Summit 2026 Schedule',
-  description: 'Full schedule archive for Heatpunk Summit 2026. Workshops, demos, panels, and networking events.',
-  openGraph: {
-    title: 'Summit 2026 Schedule | Hashrate Heatpunks',
-    description: 'Full schedule archive for Heatpunk Summit 2026. Workshops, demos, panels, and networking events.',
-    images: ['/api/og?title=SUMMIT%20SCHEDULE&subtitle=FEB%2027-28%2C%202026%20%E2%80%A2%20DENVER%2C%20CO&page=summit'],
-  },
-};
+export const metadata = pageMetadata('schedule');
 
 export default function SchedulePage() {
   const scheduleData = getScheduleData();

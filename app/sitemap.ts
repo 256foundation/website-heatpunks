@@ -1,45 +1,14 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig } from '@/data/site';
+import { pageList } from '@/data/pages';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/mission`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/education`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/summit`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/summit/schedule`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/summit/2025`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.5,
-    },
-  ];
+  return pageList.map((page) => ({
+    url: page.route === '/' ? baseUrl : `${baseUrl}${page.route}`,
+    lastModified: new Date(),
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
 }
