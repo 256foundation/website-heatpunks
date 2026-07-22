@@ -1,8 +1,13 @@
 import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { pages, archiveOg, type PageOg } from '@/data/pages';
 
-export const runtime = 'edge';
+// Node.js (default) runtime, not edge: the bundled JetBrains Mono fonts push
+// this route past Vercel's 1 MB Edge Function size limit. Node's serverless
+// function size limit is far larger, and next/og's ImageResponse has
+// supported the Node.js runtime since Next 14.
 
 // Brand palette (mirrors app/globals.css)
 const FLAME = '#ff6b00';
@@ -14,15 +19,13 @@ const WHITE = '#f5f5f5';
 const MUTED = '#888888';
 const FLAME_GRADIENT = `linear-gradient(135deg, ${FLAME} 0%, ${RED} 50%, ${FLAME_LIGHT} 100%)`;
 
-// Encode a binary asset as a data URI (edge runtime has no Buffer; use btoa).
-function toDataUri(buf: ArrayBuffer, mime: string): string {
-  const bytes = new Uint8Array(buf);
-  let binary = '';
-  for (let i = 0; i < bytes.length; i += 1) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return `data:${mime};base64,${btoa(binary)}`;
-}
+// Bundled assets, read once per warm serverless instance (not per request).
+// Next.js's build-time file tracing picks up these static readFileSync paths
+// and includes the files in the deployed function automatically.
+const OG_DIR = join(process.cwd(), 'app/api/og');
+const FONT_REGULAR = readFileSync(join(OG_DIR, 'fonts/JetBrainsMono-Regular.ttf'));
+const FONT_BOLD = readFileSync(join(OG_DIR, 'fonts/JetBrainsMono-Bold.ttf'));
+const LOGO_SRC = `data:image/png;base64,${readFileSync(join(OG_DIR, 'hrhp-mark.png')).toString('base64')}`;
 
 // Resolve the terminal content for the requested card.
 function resolveCard(searchParams: URLSearchParams): PageOg {
@@ -39,18 +42,6 @@ function resolveCard(searchParams: URLSearchParams): PageOg {
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const cardData = resolveCard(searchParams);
-
-  const [regular, bold, mark] = await Promise.all([
-    fetch(new URL('./fonts/JetBrainsMono-Regular.ttf', import.meta.url)).then((r) =>
-      r.arrayBuffer()
-    ),
-    fetch(new URL('./fonts/JetBrainsMono-Bold.ttf', import.meta.url)).then((r) =>
-      r.arrayBuffer()
-    ),
-    fetch(new URL('./hrhp-mark.png', import.meta.url)).then((r) => r.arrayBuffer()),
-  ]);
-
-  const logoSrc = toDataUri(mark, 'image/png');
 
   return new ImageResponse(
     (
@@ -92,7 +83,7 @@ export async function GET(request: NextRequest) {
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={logoSrc} width={34} height={34} alt="" style={{ display: 'flex' }} />
+            <img src={LOGO_SRC} width={34} height={34} alt="" style={{ display: 'flex' }} />
             <div style={{ display: 'flex', gap: '11px' }}>
               <div style={{ width: 15, height: 15, borderRadius: 99, backgroundColor: RED }} />
               <div style={{ width: 15, height: 15, borderRadius: 99, backgroundColor: YELLOW }} />
@@ -173,8 +164,8 @@ export async function GET(request: NextRequest) {
       width: 1200,
       height: 630,
       fonts: [
-        { name: 'JetBrains Mono', data: regular, weight: 400, style: 'normal' },
-        { name: 'JetBrains Mono', data: bold, weight: 700, style: 'normal' },
+        { name: 'JetBrains Mono', data: FONT_REGULAR, weight: 400, style: 'normal' },
+        { name: 'JetBrains Mono', data: FONT_BOLD, weight: 700, style: 'normal' },
       ],
       headers: {
         'Cache-Control': 'public, max-age=3600, s-maxage=604800, stale-while-revalidate=86400',
