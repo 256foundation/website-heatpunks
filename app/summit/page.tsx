@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Summit2027Hero } from '@/components/summit/Summit2027Hero';
 import { WhyAttendSection } from '@/components/summit/WhyAttendSection';
 import { BarriersSection } from '@/components/summit/BarriersSection';
@@ -10,18 +9,9 @@ import { PastSummitsSection } from '@/components/summit/PastSummitsSection';
 import { FAQSection } from '@/components/summit/FAQSection';
 import { ManifestoSection } from '@/components/summit/ManifestoSection';
 import { SummitCommunitySection } from '@/components/summit/SummitCommunitySection';
+import { pageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Summit 2027',
-  description:
-    'Heatpunk Summit 2027 — Feb 26–27 in Denver, CO. The open-source mining stack is here; the barriers are gone. Third annual gathering of bitcoin mining and heating builders. $350, fiat or bitcoin. Join the waitlist.',
-  openGraph: {
-    title: 'Heatpunk Summit 2027 | Hashrate Heatpunks',
-    description:
-      'ACCELERATE — the open-source mining stack is here and the barriers are gone. Third annual gathering, Feb 26–27, 2027 in Denver, CO.',
-    images: ['/api/og?title=HEATPUNK%20SUMMIT&subtitle=FEB%2026-27%2C%202027%20%E2%80%A2%20DENVER%2C%20CO&page=summit'],
-  },
-};
+export const metadata = pageMetadata('summit');
 
 const eventSchema = {
   '@context': 'https://schema.org',

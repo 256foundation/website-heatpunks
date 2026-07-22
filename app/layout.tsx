@@ -4,32 +4,38 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { siteConfig } from '@/data/site';
+import { pages } from '@/data/pages';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
 
+const home = pages.home;
+
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: home.title,
     template: `%s | ${siteConfig.name}`,
   },
-  description: siteConfig.description,
+  description: home.description,
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: home.title,
+    description: home.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: '/api/og?title=Hashrate%20Heatpunks&subtitle=Bringing%20hashrate%20back%20home',
+        url: '/api/og?card=home',
         width: 1200,
         height: 630,
-        alt: 'Hashrate Heatpunks',
+        alt: home.og.alt,
       },
     ],
   },
@@ -37,9 +43,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@HashHeatpunks',
     creator: '@HashHeatpunks',
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: ['/api/og?title=Hashrate%20Heatpunks&subtitle=Bringing%20hashrate%20back%20home'],
+    title: home.title,
+    description: home.description,
+    images: ['/api/og?card=home'],
   },
   robots: {
     index: true,
@@ -84,7 +90,7 @@ export default function RootLayout({
                 addressCountry: 'US',
               },
               sameAs: [
-                'https://twitter.com/HashHeatpunks',
+                'https://x.com/HashHeatpunks',
                 'https://forum.heatpunks.org',
                 'https://t.me/heatpunks',
                 'https://primal.net/heatpunks',

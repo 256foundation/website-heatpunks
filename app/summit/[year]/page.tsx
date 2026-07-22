@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { archiveOg } from '@/data/pages';
+import { buildMetadata } from '@/lib/metadata';
 
 interface PageProps {
   params: Promise<{ year: string }>;
@@ -10,11 +12,17 @@ const archivedYears: string[] = [];
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { year } = await params;
+  const safeYear = year.replace(/[^0-9]/g, '') || year;
 
-  return {
-    title: `Summit ${year}`,
-    description: `Archive of Heatpunk Summit ${year}.`,
-  };
+  return buildMetadata({
+    title: `Summit ${safeYear}`,
+    description: `Archive of Heatpunk Summit ${safeYear}.`,
+    canonicalPath: `/summit/${safeYear}`,
+    cardKey: 'archive',
+    cardQuery: `year=${safeYear}`,
+    ogTitle: `Summit ${safeYear} | Hashrate Heatpunks`,
+    alt: archiveOg(safeYear).alt,
+  });
 }
 
 export async function generateStaticParams() {
