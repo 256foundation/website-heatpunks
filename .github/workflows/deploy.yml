@@ -1,0 +1,121 @@
+name: Build and deploy
+
+# Push to main -> build the image -> publish to GHCR -> tell the server to pull it.
+#
+# Replaces the Vercel deployment. The server never builds anything: a broken
+# build fails here, where someone is watching, instead of on the host serving
+# the live site.
+#
+# Deploys are gated on the image passing a health check on the server. If the
+# new container does not come up healthy, deploy-site rolls back to the
+# previous tag on its own.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing image tag to deploy (for rollback). Leave blank to build from this branch."
+        required: false
+        type: string
+
+concurrency:
+  # Never let two deploys race to the same server.
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+  SITE: heatpunks
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    if: inputs.tag == ''
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Work out the image tag
+        id: meta
+        run: echo "tag=sha-${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          # Both tags: sha-xxxxxxx is what actually gets deployed and is what
+          # makes rollback possible; latest is a convenience pointer.
+          tags: |
+            ${{ env.IMAGE }}:${{ steps.meta.outputs.tag }}
+            ${{ env.IMAGE }}:latest
+          # NEXT_PUBLIC_* are compiled into the client bundle, so they must be
+          # present at build time and are public once shipped. They are repo
+          # variables rather than secrets for that reason.
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=${{ vars.NEXT_PUBLIC_SITE_URL || 'https://heatpunks.org' }}
+            NEXT_PUBLIC_WEB3FORMS_CONTACT_ACCESS_KEY=${{ vars.NEXT_PUBLIC_WEB3FORMS_CONTACT_ACCESS_KEY }}
+            NEXT_PUBLIC_WEB3FORMS_WAITLIST_ACCESS_KEY=${{ vars.NEXT_PUBLIC_WEB3FORMS_WAITLIST_ACCESS_KEY }}
+            NEXT_PUBLIC_UMAMI_WEBSITE_ID=${{ vars.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
+            NEXT_PUBLIC_UMAMI_URL=${{ vars.NEXT_PUBLIC_UMAMI_URL }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy to server
+    runs-on: ubuntu-latest
+    needs: [build]
+    # Runs after a build, or on its own when a tag is given for rollback.
+    if: always() && (needs.build.result == 'success' || inputs.tag != '')
+    environment: production
+    steps:
+      - name: Deploy
+        env:
+          TAG: ${{ inputs.tag || needs.build.outputs.tag }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+
+          # Pin the host key rather than accepting whatever answers. Without
+          # this the deploy trusts DNS, and a hijacked record would be handed
+          # the deploy credential.
+          printf '%s\n' "${{ secrets.DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
+
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          # The server's authorized_keys pins a forced command, so this key can
+          # only redeploy a known site. The argument is the whole request.
+          ssh -i ~/.ssh/id_ed25519 \
+              -o IdentitiesOnly=yes \
+              -o StrictHostKeyChecking=yes \
+              "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+              "$SITE $TAG"
+
+      - name: Check the site is actually serving
+        run: |
+          set -euo pipefail
+          URL="${{ vars.DEPLOY_HEALTHCHECK_URL || 'https://www.heatpunks.org' }}"
+          for i in $(seq 1 10); do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 "$URL" || echo 000)
+            [ "$code" = "200" ] && { echo "$URL -> 200"; exit 0; }
+            echo "attempt $i: $code"; sleep 6
+          done
+          echo "::error::$URL did not return 200 after the deploy"
+          exit 1
