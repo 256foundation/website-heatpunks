@@ -1171,8 +1171,8 @@ if (currentDate > eventEnd) → "SUMMIT 2026 COMPLETE • WATCH RECAP"
 ### Twitter Configuration
 
 - Card type: `summary_large_image`
-- Site handle: `@HashHeatpunks`
-- Creator handle: `@HashHeatpunks`
+- Site handle: `@heatpunks`
+- Creator handle: `@heatpunks`
 
 ---
 

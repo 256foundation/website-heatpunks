@@ -40,7 +40,7 @@ export function SummitCommunitySection({ sectionTag = '[007]' }: SummitCommunity
           >
             <span className="text-2xl text-[var(--terminal-color)]">𝕏</span>
             <span className="font-mono text-xs tracking-wider text-[var(--foreground)]">X / TWITTER</span>
-            <span className="font-mono text-[10px] text-[var(--muted)]">@HashHeatpunks</span>
+            <span className="font-mono text-[10px] text-[var(--muted)]">@heatpunks</span>
           </a>
 
           {/* Telegram */}

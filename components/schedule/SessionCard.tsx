@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import type { Session, Summit, Person } from '@/types/schedule';
 import { formatTime } from '@/lib/utils';
-import { AddToCalendar } from '@/components/shared/AddToCalendar';
 
 // Helper function to format a person (name with affiliation)
 function formatPerson(person: Person | string): string {
@@ -105,8 +104,6 @@ export function SessionCard({ session, date, summit }: SessionCardProps) {
 
           {/* Actions */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <AddToCalendar session={session} date={date} summit={summit} />
-
             {hasExpandableContent && (
               <div className={`transition-transform ${isExpanded ? 'rotate-180' : ''}`}>
                 <ChevronDownIcon className="h-4 w-4 text-[var(--muted)]" />

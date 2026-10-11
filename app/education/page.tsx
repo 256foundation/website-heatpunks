@@ -109,7 +109,7 @@ export default function EducationPage() {
                 rel="noopener noreferrer"
                 className="text-[var(--accent)] hover:underline"
               >
-                Donations to the 256 Foundation
+                donations to the 256 Foundation
               </a>{' '}
               fund free educational content for the hashrate heating industry.
             </p>

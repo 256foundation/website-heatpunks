@@ -27,7 +27,7 @@ export function GrantsSection() {
             >
               256 Foundation
             </a>
-            , which funds open-source Bitcoin mining and mining decentralization - and hashrate heating
+            , which funds open-source Bitcoin mining and mining decentralization — and hashrate heating
             fits squarely within that mission. One condition: the Foundation funds{' '}
             <span className="text-[var(--foreground)]">open-source work only</span>, so whatever you
             build, document, or teach with a grant must be released publicly.

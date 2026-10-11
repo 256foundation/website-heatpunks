@@ -26,7 +26,7 @@ export function AboutSection() {
         <div className="mb-12">
           <span className="section-tag">[001]</span>
           <h2 className="mt-2 mb-4 font-mono text-2xl font-bold tracking-wide md:text-3xl">
-            WHAT WAS <span className="text-[var(--heatpunk-yellow-color)]">HEATPUNK 2026</span>
+            WHAT WAS <span className="text-[var(--heatpunk-yellow-color)]">HEATPUNK SUMMIT 2026</span>
           </h2>
         </div>
 

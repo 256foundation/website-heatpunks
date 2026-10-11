@@ -40,7 +40,7 @@ export const summit2026Videos: Video[] = [
   {
     id: 'hps26-talk-05',
     title: 'Set & Forget: Ideal Control for Hashrate Heat',
-    description: 'Dissecting control philosophy for hashrate heating: analog reliability vs. digital optimization, KISS principles vs. grid-aware automation, standardization (BACNet/Home Assistant) vs. custom hacks, and whether smarter control truly delivers tighter thermal performance.',
+    description: 'Dissecting control philosophy for hashrate heating: analog reliability vs. digital optimization, KISS principles vs. grid-aware automation, standardization (BACnet/Home Assistant) vs. custom hacks, and whether smarter control truly delivers tighter thermal performance.',
     youtubeId: 'tIJDsZ7fzqw',
   },
   {
@@ -112,12 +112,12 @@ export const summit2026Videos: Video[] = [
   {
     id: 'hps26-award',
     title: 'Heatpunk Innovation Award Announcement',
-    description: 'Debut of the inaugural Heatpunk Hardware Award — recognizing the most innovative hashrate heating system showcased on-site at HPS 2026. Winner selected live during proceedings.',
+    description: 'Debut of the inaugural Heatpunk Innovation Award — recognizing the most innovative hashrate heating system showcased on-site at HPS 2026. Winner selected live during proceedings.',
     youtubeId: 'dNKZhRVaXbM',
   },
   {
     id: 'hps26-workshop-01',
-    title: 'Home Assistant Deep Dive: Automating Hashrate Heat as IOT Devices',
+    title: 'Home Assistant Deep Dive: Automating Hashrate Heat as IoT Devices',
     description: 'Led by Exergy\'s Dylan, this workshop integrates miners directly into Home Assistant — building local automations triggered by thermostats, solar production, or energy prices. Zero cloud required.',
     youtubeId: 'k_x48ErmSh8',
   },
@@ -157,8 +157,8 @@ export const summit2025Videos: Video[] = [
   },
   {
     id: 'hps25-opening',
-    title: 'UnderMine 2025 Opening Remarks',
-    description: 'Opening remarks with Cody Harris and Tyler Stevens launching the first-ever Heatpunk Summit — then branded "UnderMine" — in Denver.',
+    title: 'Undermine 2025 Opening Remarks',
+    description: 'Opening remarks with Cody Harris and Tyler Stevens launching the first-ever Heatpunk Summit — then branded "Undermine" — in Denver.',
     youtubeId: 'UgL4H89O73c',
   },
   {

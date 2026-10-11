@@ -35,7 +35,7 @@ Common edits and exactly where they live:
 |---|---|
 | External URLs, nav, social links, contact email, foundation info | `data/site.ts` |
 | 256 Foundation grants/donate links (used by re-framed grants copy) | `data/site.ts` → `foundation.grants` / `foundation.donate` |
-| Summit talk / recap videos | `data/videos.ts` (Summit page features entry 0; Education page lists all) |
+| Summit talk / recap videos | `data/videos.ts` (`/summit/2026` features entry 0; Education page lists all) |
 | Summit schedule | `data/schedule.yaml` |
 | Summit sponsors | `data/sponsors.yaml` |
 | 2025 / 2027 summit archive content | `data/summit2025.ts` / `data/summit2027.ts` |

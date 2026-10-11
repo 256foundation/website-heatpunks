@@ -137,7 +137,7 @@ Returns a Next `Metadata` object from a `PageEntry`:
 - `description`: `entry.description`.
 - `alternates.canonical`: `entry.route` (resolved against `metadataBase`).
 - `openGraph`: `{ title: ogTitle, description, url: route, siteName, locale: 'en_US', type: 'website', images: [{ url: '/api/og?card=' + key, width: 1200, height: 630, alt: entry.og.alt }] }` where `ogTitle` = `entry.isHome ? entry.title : entry.title + ' | Hashrate Heatpunks'`.
-- `twitter`: `{ card: 'summary_large_image', site: '@HashHeatpunks', creator: '@HashHeatpunks', title: ogTitle, description, images: ['/api/og?card=' + key] }`.
+- `twitter`: `{ card: 'summary_large_image', site: '@heatpunks', creator: '@heatpunks', title: ogTitle, description, images: ['/api/og?card=' + key] }`.
 
 This guarantees OG + Twitter + canonical always agree. Reused by every page.
 
@@ -155,7 +155,7 @@ This guarantees OG + Twitter + canonical always agree. Reused by every page.
   - `description: pages.home.description`
   - `openGraph`/`twitter` → home card (`/api/og?card=home`) with home alt.
   - keep `metadataBase`, `robots`, `icons`.
-  - **JSON-LD (Organization):** review — change `sameAs` `https://twitter.com/HashHeatpunks` → `https://x.com/HashHeatpunks`; verify `logo` (`/images/logo.png` exists), `foundingDate`, `address`. Keep otherwise.
+  - **JSON-LD (Organization):** review — change `sameAs` `https://twitter.com/HashHeatpunks` → `https://x.com/heatpunks`; verify `logo` (`/images/logo.png` exists), `foundingDate`, `address`. Keep otherwise.
 - `app/mission/page.tsx`, `app/education/page.tsx`, `app/summit/page.tsx`, `app/summit/schedule/page.tsx`, `app/summit/2025/page.tsx`, `app/summit/2026/page.tsx`: replace the inline `metadata` object with `export const metadata = pageMetadata('<key>')`.
   - On `app/summit/page.tsx`, also review the **Event** JSON-LD (dates 2027-02-26/27, venue "The Space", `$350` offer) for accuracy; keep if correct.
 - `app/summit/[year]/page.tsx`: `generateMetadata` builds via helper logic with `card=archive&year={year}` image, title `Summit {year}`, description `Archive of Heatpunk Summit {year}.`, canonical `/summit/{year}`.
@@ -180,7 +180,7 @@ This guarantees OG + Twitter + canonical always agree. Reused by every page.
 ## Community & external
 - [Forum](https://forum.heatpunks.org): community discussion (Discourse)
 - [Group chat / Telegram](https://t.me/heatpunks)
-- [X / Twitter](https://x.com/HashHeatpunks)
+- [X / Twitter](https://x.com/heatpunks)
 - [Nostr](https://primal.net/heatpunks)
 - [256 Foundation](https://256foundation.org): parent organization
 - [256 Foundation Grants](https://256foundation.org/grants): grants program

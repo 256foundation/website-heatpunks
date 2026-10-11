@@ -3,7 +3,7 @@ import { siteConfig } from '@/data/site';
 import { pages, type PageEntry } from '@/data/pages';
 
 const SITE_NAME = siteConfig.name;
-const TWITTER_HANDLE = '@HashHeatpunks';
+const TWITTER_HANDLE = '@heatpunks';
 
 /** Absolute-ish OG title: home is the descriptive default; subpages append the brand. */
 function ogTitleFor(entry: PageEntry): string {

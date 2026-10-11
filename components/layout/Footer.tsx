@@ -39,7 +39,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >
-                [256.ORG]
+                [256FOUNDATION.ORG]
               </a>
               <a
                 href={siteConfig.foundation.github}

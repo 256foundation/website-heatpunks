@@ -13,8 +13,8 @@ const impacts = [
   },
   {
     key: 'GRANTS_PROGRAM',
-    label: 'GRANTS PROGRAM',
-    description: 'Funding builders and researchers',
+    label: '256 FOUNDATION GRANTS',
+    description: 'Funding open-source builders and researchers',
   },
   {
     key: 'ANNUAL_SUMMIT',

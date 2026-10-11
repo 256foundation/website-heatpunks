@@ -90,7 +90,7 @@ A community website for Hashrate Heatpunks - a community of bitcoiners and heati
    - Link to full forum at bottom
 
 3. **Links/Resources Section**
-   - Social links: Telegram (t.me/heatpunks), X (@HashHeatpunks), Forum
+   - Social links: Telegram (t.me/heatpunks), X (@heatpunks), Forum
    - 256 Foundation attribution with links to 256foundation.org and github.com/256foundation
 
 4. **Contact Form Section**
@@ -461,7 +461,7 @@ days:
 - **Site Name**: Hashrate Heatpunks
 - **Base URL**: https://heatpunks.org
 - **Title Format**: `{Page Name} | Hashrate Heatpunks`
-- **Twitter Handle**: @HashHeatpunks
+- **Twitter Handle**: @heatpunks
 - **Location**: Denver, Colorado
 - **Founded**: 2024
 - **Entity Type**: Project of 256 Foundation
@@ -687,7 +687,7 @@ The Summit OG image should update based on event status:
 
 ### Twitter Card Configuration
 - Card type: `summary_large_image` for all pages
-- Site handle: `@HashHeatpunks`
+- Site handle: `@heatpunks`
 
 ---
 

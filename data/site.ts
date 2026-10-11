@@ -11,7 +11,7 @@ export const siteConfig = {
 
   links: {
     telegram: TELEGRAM_URL,
-    twitter: 'https://x.com/HashHeatpunks',
+    twitter: 'https://x.com/heatpunks',
     forum: FORUM_URL,
     nostr: 'https://primal.net/heatpunks',
     foundation: FOUNDATION_URL,

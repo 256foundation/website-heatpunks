@@ -12,7 +12,7 @@ export default function SchedulePage() {
     <div className="relative py-12 md:py-16 bg-[var(--background)] min-h-screen">
       <div className="noise-overlay" />
       <div className="section-container relative z-10">
-        <ScheduleHeader summit={scheduleData.summit} days={scheduleData.days} />
+        <ScheduleHeader summit={scheduleData.summit} />
         <DayTabs days={scheduleData.days} summit={scheduleData.summit} />
       </div>
     </div>

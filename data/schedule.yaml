@@ -160,7 +160,7 @@ days:
         description: "Collaboratively outline industry standards with leading firm TESSERE and peers. This session tackles certification roadblocks, client education frameworks, and hybrid-system specifications surfaced in the Building With Intention panel. Outcome: A shared action plan to transform hashrate heating from prototype to approved architectural detail."
 
       - id: "day1-workshop-home-assistant"
-        title: "Home Assistant Deep Dive - Automating Hashrate Heat as IOT Devices"
+        title: "Home Assistant Deep Dive - Automating Hashrate Heat as IoT Devices"
         type: "workshop"
         start: "12:30"
         end: "13:15"
@@ -189,10 +189,10 @@ days:
             affiliation: "Upstream Data"
           - name: "Schnitzel"
             affiliation: "256 Foundation"
-        description: "When your heater is an internet-connected money printer, \"set and forget\" demands new rules. This panel dissects control philosophy for hashrate heating: analog reliability vs. digital optimization, KISS principles vs. grid-aware automation, and standardization (BACNet/Home Assistant) vs. custom hacks. Experts debate failsafe requirements, optimization priorities, and whether smarter control truly delivers tighter thermal performance—without sacrificing robustness."
+        description: "When your heater is an internet-connected money printer, \"set and forget\" demands new rules. This panel dissects control philosophy for hashrate heating: analog reliability vs. digital optimization, KISS principles vs. grid-aware automation, and standardization (BACnet/Home Assistant) vs. custom hacks. Experts debate failsafe requirements, optimization priorities, and whether smarter control truly delivers tighter thermal performance—without sacrificing robustness."
 
       - id: "day1-panel-chips"
-        title: "Chips on the Table: Home-Mining Hardware & ASIC For All"
+        title: "Chips on the Table: Home-Mining Hardware & ASICs For All"
         type: "panel"
         start: "14:05"
         end: "14:40"
@@ -255,7 +255,7 @@ days:
         start: "16:00"
         end: "18:00"
         location: "The Space"
-        description: "After Day 1 programming concludes, use this unstructured time as you wish: network informally at The Space or return to your hotel to refresh. Regroup afterward for our off-site Evening Dinner & Afterparty"
+        description: "After Day 1 programming concludes, use this unstructured time as you wish: network informally at The Space or return to your hotel to refresh. Regroup afterward for our off-site Evening Dinner & Afterparty."
 
       - id: "day1-afterparty"
         title: "Afterparty with Food and Drinks"
@@ -305,7 +305,7 @@ days:
         status: "confirmed"
         speakers:
           - name: "Anna Chekhovich"
-            affiliation: "Anti Corruption Foundation"
+            affiliation: "Anti-Corruption Foundation"
         description: "Exiled Russian activist Anna Chekhovich (CFO, Anti-Corruption Foundation) reframes hashrate heating as essential human rights technology. Drawing from frontline experience with censorship and asset seizure, she reveals how residential miners—disguised as heaters—enable private, non-KYC bitcoin acquisition for at-risk populations. The talk issues a call: Build tools that turn heating bills into uncensorable economic lifelines."
 
       - id: "day2-panel-workforce"
@@ -350,7 +350,7 @@ days:
             affiliation: "Alera Group"
           - name: "Brandon Sheiner"
             affiliation: "Former ASHRAE NYC President"
-        description: "When your heating elements is a circuit board, regulators see red flags. This no-BS panel (CPA, state official, Bitcoin lobbyist, specialty insurer) confronts existential hurdles: taxing hidden mining revenue, passing certifications, conforming to standards, reframing environmental debates, and forcing insurers to recognize hashrate systems as legitimate heating infrastructure. Outcome: A compliance roadmap to transform fringe tech into insurable, code-compliant primary heating."
+        description: "When your heating element is a circuit board, regulators see red flags. This no-BS panel (CPA, state official, Bitcoin lobbyist, specialty insurer) confronts existential hurdles: taxing hidden mining revenue, passing certifications, conforming to standards, reframing environmental debates, and forcing insurers to recognize hashrate systems as legitimate heating infrastructure. Outcome: A compliance roadmap to transform fringe tech into insurable, code-compliant primary heating."
 
       - id: "day2-panel-financial"
         title: "The Asset-Liability Flip: When Buildings Print Money"
@@ -420,7 +420,7 @@ days:
         description: "Walk through Exergy's real-world installation: a water-cooled Bitcoin miner heating The Space's radiant floors via a plumber-led hydronic loop. We'll dissect control gaps (no fixed outlet temps, dynamic wattage-to-heat conversion) and workshop solutions to replicate traditional boiler logic atop hashrate heating. Join hydronics experts to confront the quirks of \"smart heat\" and define next-gen control schemas."
 
       - id: "day2-hardware-award"
-        title: "Heatpunk Hardware Award Announcement"
+        title: "Heatpunk Innovation Award Announcement"
         type: "talk"
         start: "13:20"
         end: "13:25"
@@ -433,7 +433,7 @@ days:
             affiliation: "Exergy"
           - name: "Cody Harris"
             affiliation: "Citadel Construction"
-        description: "At this year's summit, we debut the inaugural Heatpunk Hardware Award—recognizing the most innovative hashrate heating system showcased on-site. The winner will be selected live during proceedings. All exhibited systems are eligible."
+        description: "At this year's summit, we debut the inaugural Heatpunk Innovation Award—recognizing the most innovative hashrate heating system showcased on-site. The winner will be selected live during proceedings. All exhibited systems are eligible."
 
       - id: "day2-panel-precision-btu"
         title: "Precision BTU: The Economics of Mining Heater Sizing & Custom Systems"
@@ -473,7 +473,7 @@ days:
             affiliation: "Hashpool"
           - name: "Schnitzel"
             affiliation: "256 Foundation"
-        description: "When your hashrate follows heating demand—not price signals—pool payout mechanics become existential. This panel dissects tradeoffs for intermittent miners: Ocean's Tides. FPPS stability vs. Stratum V2's job negotiation, custodial risk vs. e-hash tokenized flexibility, and HydraPool's open-source auditability vs. customization complexity. Learn which structures minimize \"intermittency tax,\" maximize verifiable earnings, and align with heatpunk sovereignty values—even if it costs sats."
+        description: "When your hashrate follows heating demand—not price signals—pool payout mechanics become existential. This panel dissects tradeoffs for intermittent miners: Ocean's Tides, FPPS stability vs. Stratum V2's job negotiation, custodial risk vs. e-hash tokenized flexibility, and HydraPool's open-source auditability vs. customization complexity. Learn which structures minimize \"intermittency tax,\" maximize verifiable earnings, and align with heatpunk sovereignty values—even if it costs sats."
 
       - id: "day2-panel-256-foundation"
         title: "Dismantling the Proprietary Mining Empire - This is the 256 Foundation"
@@ -518,7 +518,7 @@ days:
         start: "15:35"
         end: "17:00"
         location: "The Space"
-        description: "After Day 2 programming concludes, use this unstructured time as you wish: network informally at The Space or return to your hotel to refresh. Regroup back at The Space for an evening backyard BBQ and hot tub afterparty"
+        description: "After Day 2 programming concludes, use this unstructured time as you wish: network informally at The Space or return to your hotel to refresh. Regroup back at The Space for an evening backyard BBQ and hot tub afterparty."
 
       - id: "day2-bbq-afterparty"
         title: "BBQ Pig Roast Dinner & Hot Tub Afterparty"
@@ -535,6 +535,6 @@ days:
         end: "20:30"
         location: "Backyard"
         speakers:
-          - "Cody, Tyler & Dylan Rotate as hosts"
-          - "Assorted Guests Dips in the Tub"
+          - "Cody, Tyler & Dylan rotate as hosts"
+          - "Assorted Guests Dip in the Tub"
         description: "Close the Summit swimmingly: Join Ocean Mining and special guests for the night's most provocative conversation—streamed live from the hot tub. Expect unfiltered takes on Bitcoin's future as we soak in the world's first hashrate-heated tub. This is Heatpunk's signature sendoff: equal parts debate, debrief, and debauchery."

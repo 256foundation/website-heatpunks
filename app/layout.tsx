@@ -41,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@HashHeatpunks',
-    creator: '@HashHeatpunks',
+    site: '@heatpunks',
+    creator: '@heatpunks',
     title: home.title,
     description: home.description,
     images: ['/api/og?card=home'],
@@ -90,7 +90,7 @@ export default function RootLayout({
                 addressCountry: 'US',
               },
               sameAs: [
-                'https://x.com/HashHeatpunks',
+                'https://x.com/heatpunks',
                 'https://forum.heatpunks.org',
                 'https://t.me/heatpunks',
                 'https://primal.net/heatpunks',

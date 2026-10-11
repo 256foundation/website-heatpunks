@@ -4,7 +4,7 @@ The community website for the **Hashrate Heatpunks** — a community working on 
 
 Live at **[heatpunks.org](https://heatpunks.org)**.
 
-The site is the hub for the community: a landing page with a live forum feed, educational resources (books, guides, summit talk videos), the Hashrate Heatpunk Grant Program, and Heatpunk Summit event pages with full schedules.
+The site is the hub for the community: a landing page with a live forum feed, educational resources (books, guides, summit talk videos), an overview of the 256 Foundation grant program, and Heatpunk Summit event pages with full schedules.
 
 ---
 
@@ -66,9 +66,9 @@ public/         Static assets (images, downloadable resources)
 
 Common edits don't require component changes:
 
-- **Summit videos** — edit `data/videos.ts`. The Summit page features the first entry and the Education page lists them.
+- **Summit videos** — edit `data/videos.ts`. The 2026 summit archive (`/summit/2026`) features the first entry and the Education page lists them all.
 - **Schedule & sponsors** — edit `data/schedule.yaml` and `data/sponsors.yaml`.
-- **Site-wide links, navigation, and the grant program toggle** — edit `data/site.ts`. The grant program can be paused/reopened by flipping `grants.open` there, which gates the application form, the API endpoint, and all "apply" CTAs across the site in one place.
+- **Site-wide links and navigation** (including the 256 Foundation grants/donate URLs, `foundation.grants` / `foundation.donate`) — edit `data/site.ts`.
 
 ---
 
@@ -122,7 +122,7 @@ Copy `.env.example` to `.env.local` (development) or provide these to the contai
 
 > `NEXT_PUBLIC_*` variables are read at **build time** and baked into the client bundle — set them before building, not just at runtime. This includes both Web3Forms keys.
 
-Without the two `NEXT_PUBLIC_WEB3FORMS_*_ACCESS_KEY` vars configured, the contact form and summit waitlist (respectively) will fail to submit. Without `DISCOURSE_URL`, the live forum feed on the landing page is simply omitted.
+Without the two `NEXT_PUBLIC_WEB3FORMS_*_ACCESS_KEY` vars configured, the contact form and summit waitlist (respectively) will fail to submit. `DISCOURSE_URL` defaults to `https://forum.heatpunks.org`; if the forum can't be reached, the feed shows a "temporarily unavailable" fallback.
 
 ---
 
