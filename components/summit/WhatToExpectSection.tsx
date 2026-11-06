@@ -70,8 +70,8 @@ export function WhatToExpectSection() {
 
         {/* Agenda note */}
         <div className="mt-8 p-4 bg-[var(--background)] border border-[var(--card-border)] font-mono text-xs text-[var(--muted)]">
-          <span className="text-[var(--terminal-color)]">NOTE_</span> Full agenda and speaker lineup
-          announced closer to the event. Join the waitlist to stay informed.
+          <span className="text-[var(--terminal-color)]">NOTE_</span> Detailed schedule and side
+          activities will follow, along with the speaker lineup. Join the waitlist to stay informed.
         </div>
 
         {/* Call for content */}

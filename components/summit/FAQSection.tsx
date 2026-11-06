@@ -8,12 +8,16 @@ const faqItems2027: FAQItem[] = [
     answer: 'Tickets are $350 USD, payable in fiat or bitcoin. The purchase link is sent after we review your waitlist application — we curate attendance to keep the signal high.',
   },
   {
+    question: 'Are tickets refundable or transferable?',
+    answer: 'Tickets are non-transferable and non-refundable.',
+  },
+  {
     question: 'What is the waitlist? Why not just sell tickets?',
     answer: 'The Heatpunk Summit is a working event, not a conference. We keep it small and hands-on by reviewing who attends. Join the waitlist, tell us about yourself and your work, and if you\'re a fit we\'ll send you the ticket link. If demand is high, we prioritize people who are actively building.',
   },
   {
     question: 'When and where is HPS 2027?',
-    answer: 'February 26–27, 2027 at The Space in RiNo, Denver, Colorado. An optional pre-summit ski day on February 25th is also planned — details to follow, so check back.',
+    answer: 'February 26–27, 2027 at The Space in RiNo, Denver, Colorado. Focused programming and workshops run those two days; a detailed schedule and side activities will follow. An optional pre-summit ski day on February 25th is also planned — details to follow, so check back.',
   },
   {
     question: 'What\'s included in the ticket?',

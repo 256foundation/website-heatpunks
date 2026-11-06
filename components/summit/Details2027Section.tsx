@@ -14,7 +14,7 @@ export function Details2027Section() {
             <DetailBlock
               label="DATE"
               value="February 26–27, 2027"
-              sub="Programming runs all day Friday the 26th and Saturday the 27th, with evening activities both nights."
+              sub="Focused programming and workshops Feb 26–27. Doors open at 9:00am and programming starts at 10:00am; Saturday programming runs into the early afternoon. Detailed schedule and side activities to follow."
             />
             <DetailBlock
               label="TRAVEL"
@@ -24,7 +24,7 @@ export function Details2027Section() {
             <DetailBlock
               label="TICKET"
               value="$350 USD"
-              sub="Pay in fiat or bitcoin · includes meals, the after-party & all sessions · purchase link sent after waitlist review."
+              sub="Pay in fiat or bitcoin · includes meals, the after-party & all sessions · purchase link sent after waitlist review. Tickets are non-transferable and non-refundable."
             />
             <DetailBlock
               label="STATUS"
